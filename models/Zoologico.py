@@ -1,17 +1,8 @@
 class Zoologico:
-    def __init__(self, nombre = "", habitats = []):
+    def __init__(self, nombre = "", habitats = [], registro = []):
         self.nombre = nombre
         self.habitats = habitats
-
-
-    def setNombre(self, nombre):
-        self.nombre = nombre
-    def setHabitats(self, habitats):
-        self.habitats = habitats
-    def getNombre(self):
-        return self.nombre
-    def getHabitats(self):
-        return self.habitats
+        self.registro = registro
 
     def agregar(self, Habitat):
         self.habitats.append(Habitat)
