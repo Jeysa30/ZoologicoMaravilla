@@ -1,4 +1,5 @@
 class ZoologicoController():
+    idAnimal = 0
     def __init__(self, modelo, vista):
         self.modelo = modelo
         self.vista = vista
@@ -7,7 +8,9 @@ class ZoologicoController():
         if op == 1:
             print("opcion 1")
         if op == 2:
-            print("opcion 2")
+            animal = self.vista.menuAgregarAnimal(idAnimal)
+            idAnimal += 1
+            self.modelo.agregar(animal)
         if op == 3:
             print("opcion 3")
         if op == 4:
