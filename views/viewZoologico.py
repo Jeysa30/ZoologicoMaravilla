@@ -1,16 +1,15 @@
 import controllers.controllerZoologico as zooController
 import models.Zoologico as zooModel
-import models.Habitat as habitatModel
-import models.Animal as animalModel
 
 class Zoo:
     def menuZoo(self):
         print("\n------BIENVENIDOS AL ZOOLOGICO MARAVILLA------\n")
-        habitat = habitatModel.Habitat()
-        controlador = zooController.ZoologicoController(habitat, self)
+        ZoologicoMaravilla = zooModel.Zoologico("Zoologico Maravilla")
+        controlador = zooController.ZoologicoController(ZoologicoMaravilla, self)
+
 
         while True:
-            print("-> SELECCIONA LA OPCION A REALIZAR.\n")
+            print(" ----- MENU -----\n")
             print("1. Agrega un habitat.")
             print("2. Agregar animal.")
             print("3. Modificar alimentacion de un animal.")
@@ -42,3 +41,25 @@ class Zoo:
 
         nuevoAnimal = animalModel.Animal(nombre, especieAnimal, id, edad, estadoSalud, cantDormir, cantComer)
         return nuevoAnimal
+
+    def menuHabitat(self):
+        print("\nHabitats disponibles:")
+        print("1. Desierto (grados)")
+        print("2. Selva(Grados)")
+        print("3. Acuatico()")
+        print("4. Polar()")
+        return int(input("Ingrese el habitat que quiere crear: "))
+
+    def dietaHabitat(self):
+        print("\n Dietas para habitats disponibles:")
+        print("1. Omnivoro")
+        print("2. Carnivoro")
+        print("3. Herbivoro")
+        dieta = int(input("Ingrese la dieta del habitat que quiere crear: "))
+        if dieta == 1: return "Omnivoro"
+        elif dieta == 2: return "Carnivoro"
+        elif dieta == 3: return "Herbivoro"
+
+    def solicitar_dato(self, mensaje):
+        return input(mensaje)
+

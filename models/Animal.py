@@ -12,5 +12,3 @@ class Animal:
         self.cantComerTemporal = cantComer
         self.jugar = False
         self.alimento = alimento
-
-

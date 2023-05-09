@@ -1,7 +1,7 @@
 class Habitat:
-    def __init__(self, nombre = "", animales = {}, maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = ""):
+    def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = ""):
         self.nombre = nombre
-        self.animales = animales
+        self.animales = {}
         self.maxTemperatura = maxTemperatura
         self.minTemperatura = minTemperatura
         self.cantMaxAnimales = cantMaxAnimales
@@ -12,9 +12,9 @@ class Habitat:
         self.animales[Animal.id] = Animal
 
 
-class Desierto(Habitat):
-    def __init__(self, nombre = "", animales = {}, maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = "", captus = 0, agua = 0):
-        super().__init__((nombre, animales, maxTemperatura, minTemperatura, cantMaxAnimales, dieta))
+class Desertico(Habitat):
+    def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = "", captus = 0, agua = 0):
+        super().__init__(nombre, maxTemperatura, minTemperatura, cantMaxAnimales, dieta)
         self.captus = captus
         self.agua = agua
 
@@ -23,8 +23,8 @@ class Desierto(Habitat):
 
 
 class Selvatico(Habitat):
-    def __init__(self, nombre = "", animales = {}, maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = "", arboles = 0, rios = 0):
-        super().__init__((nombre, animales, maxTemperatura, minTemperatura, cantMaxAnimales, dieta))
+    def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = "", arboles = 0, rios = 0):
+        super().__init__(nombre, maxTemperatura, minTemperatura, cantMaxAnimales, dieta)
         self.arboles = arboles
         self.rios = rios
 
@@ -33,8 +33,8 @@ class Selvatico(Habitat):
 
 
 class Acuatico(Habitat):
-    def __init__(self, nombre = "", animales = {}, maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = "", algas = 0, Corales = 0):
-        super().__init__((nombre, animales, maxTemperatura, minTemperatura, cantMaxAnimales, dieta))
+    def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = "", algas = 0, Corales = 0):
+        super().__init__(nombre, maxTemperatura, minTemperatura, cantMaxAnimales, dieta)
         self.algas = algas
         self.corales = corales
 
@@ -42,9 +42,9 @@ class Acuatico(Habitat):
         super.agregar(Animal)
 
 
-class Polar(Habitat):
-    def __init__(self, nombre = "", animales = {}, maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = "", glaciares = 0, iglus = 0):
-        super().__init__((nombre, animales, maxTemperatura, minTemperatura, cantMaxAnimales, dieta))
+class Artico(Habitat):
+    def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, cantMaxAnimales = 0, dieta = "", glaciares = 0, iglus = 0):
+        super().__init__(nombre, maxTemperatura, minTemperatura, cantMaxAnimales, dieta)
         self.glaciares = glaciares
         self.iglus = iglus
 
