@@ -32,19 +32,16 @@ class Zoo:
             else:
                 print(controlador.ejecutar_menu(op))
 
-
-
-
     def menuHabitat(self):
         print("\nHabitats disponibles:")
-        print("1. Desierto (grados)")
-        print("2. Selva(Grados)")
-        print("3. Acuatico()")
-        print("4. Polar()")
+        print("1. Desierto(40 a 60)")
+        print("2. Selva(20 a 39)")
+        print("3. Acuatico(0 a 19)")
+        print("4. Polar(-20 a -1)")
         return int(input("Ingrese el habitat que quiere crear: "))
 
     def elegirDieta(self, mensaje):
-        print("\n Dietas para el", mensaje, "disponibles:")
+        print("\n Dietas para el ", mensaje, "disponibles:")
         print("1. Omnivoro")
         print("2. Carnivoro")
         print("3. Herbivoro")

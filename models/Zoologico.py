@@ -11,6 +11,9 @@ class Zoologico:
     def agregarAnimalRegistro(self, animal):
         self.registro.append(animal)
 
+    def eliminarAnimalRegistro(self, animal):
+        self.registro.remove(animal)
+
     def listarHabitats(self):
         posicion = 1
         print("Habitats: ")
