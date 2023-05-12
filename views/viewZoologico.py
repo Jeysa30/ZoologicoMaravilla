@@ -53,4 +53,9 @@ class Zoo:
     def solicitar_dato(self, mensaje):
         return input(mensaje)
 
-    # def elegirAnimal(self):
+    def menuAlimento(self, mensaje):
+        print("1. Agregar una nueva comida." )
+        print("2. Eliminar alguna comida.")
+
+
+

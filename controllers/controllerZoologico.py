@@ -19,7 +19,8 @@ class ZoologicoController():
             self.agregarAnimalHabitat()
             return "Se agrego el animal correctamente al habitat"
         elif op == 4:
-            print("opcion 4")
+            self.modificarAlimentacion()
+            return "El alimento se modifico correctamente"
         elif op == 5:
             print("opcion 5")
         elif op == 6:
@@ -74,3 +75,25 @@ class ZoologicoController():
         habitatAgregar.animales[animalAgregar.id] = animalAgregar
         self.modelo.eliminarAnimalRegistro(animalAgregar)
 
+    def modificarAlimentacion(self):
+        self.modelo.listarAnimales()
+        escogerAnimal = int(self.vista.solicitar_dato("Ingrese el numero del animal al cual desee modificar su alimentacion: "))
+        self.modelo.listarAlimentos()
+        self.vista.menuAlimento("\n--Modificaciones de los alimentos del animal: ")
+        seleccion = int(self.vista.solicitar_dato("Que modificaciones quieres realizar: "))
+
+        if seleccion == 1:
+            self.modelo.listaTipoAlimento()
+            opcion = int(self.vista.solicitar_dato("Ingrese el numero del alimento que quiere agregar: "))
+            agregar = self.modelo.alimento[opcion-1]
+            self.modelo.agregarAlimento(agregar)
+            eliminar = self.modelo.posiblesAlimentos[opcion-1]
+            self.modelo.eliminarAlimento(eliminar)
+
+        elif seleccion == 2:
+            self.modelo.listarAlimentos()
+            opcion = int(self.vista.solicitar_dato("Ingrese el numero del alimento que quiere eliminar: "))
+            eliminar = self.modelo.alimento[opcion-1]
+            self.modelo.eliminarAlimento(eliminar)
+            agregar = self.modelo.posiblesAlimentos[opcion-1]
+            self.modelo.agregarAlimento(agregar)

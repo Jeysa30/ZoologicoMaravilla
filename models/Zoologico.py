@@ -16,14 +16,14 @@ class Zoologico:
 
     def listarHabitats(self):
         posicion = 1
-        print("Habitats: ")
+        print("---Habitats: ")
         for habitat in self.habitats:
             print(posicion, "-",habitat.nombre)
             posicion += 1
 
     def listarAnimales(self):
         posicion = 1
-        print("Animales: ")
+        print("---Animales: ")
         for animal in self.registro:
             print(posicion, "-",animal.nombre)
             posicion += 1
