@@ -21,9 +21,18 @@ class Zoologico:
             print(posicion, "-",habitat.nombre)
             posicion += 1
 
-    def listarAnimales(self):
+    def listarAnimalesRegistro(self):
         posicion = 1
         print("---Animales: ")
         for animal in self.registro:
             print(posicion, "-",animal.nombre)
             posicion += 1
+
+    def listarAnimalesHabitats(self):
+        for habitat in self.habitats:
+            habitat.listarAnimales()
+
+    def buscarAnimalHabitatsID(self, id):
+        for habitat in self.habitats:
+            if habitat.animales[id]:
+                return habitat.animales[id]

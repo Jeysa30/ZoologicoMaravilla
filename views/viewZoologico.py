@@ -38,7 +38,10 @@ class Zoo:
         print("2. Selva(20 a 39)")
         print("3. Acuatico(0 a 19)")
         print("4. Polar(-20 a -1)")
-        return int(input("Ingrese el habitat que quiere crear: "))
+        opcion = int(input("Ingrese el habitat que quiere crear: "))
+        while opcion < 1 or opcion > 4:
+            opcion = int(input("Ese numero no es valido, vuelva a ingresar uno valido: "))
+        return opcion
 
     def elegirDieta(self, mensaje):
         print("\n Dietas para el ", mensaje, "disponibles:")
@@ -46,6 +49,8 @@ class Zoo:
         print("2. Carnivoro")
         print("3. Herbivoro")
         dieta = int(input("Ingrese el numero de la dieta: "))
+        while dieta < 1 or dieta > 3:
+            dieta = int(input("Ese numero no es valido, vuelva a ingresar el numero de la dieta: "))
         if dieta == 1: return "Omnivoro"
         elif dieta == 2: return "Carnivoro"
         elif dieta == 3: return "Herbivoro"
@@ -53,9 +58,13 @@ class Zoo:
     def solicitar_dato(self, mensaje):
         return input(mensaje)
 
-    def menuAlimento(self, mensaje):
+    def menuAlimento(self):
+        print("\n--Modificaciones de los alimentos del animal: ")
         print("1. Agregar una nueva comida." )
         print("2. Eliminar alguna comida.")
 
-
-
+    def menuAccion(self):
+        print("\n--Acciones que puede realizar el animal ")
+        print("1. Comer.")
+        print("2. Dormir.")
+        print("3. Jugar.")

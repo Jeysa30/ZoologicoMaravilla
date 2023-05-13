@@ -18,11 +18,11 @@ class Dieta:
             self.alimento = ["hierva", "frutas", "vegetales"]
             self.posiblesAlimentos = ["hojas", "raices", "flores", "nectar", "polen", "corteza"]
 
-    def agregarAlimento(self, alimento):
-        self.alimento.append(alimento)
+    def agregarAlimento(self, alimento, lista):
+        lista.append(alimento)
 
-    def eliminarAlimento(self, alimento):
-        self.alimento.remove(alimento)
+    def eliminarAlimento(self, alimento, lista):
+        lista.remove(alimento)
 
     def listarAlimentos(self):
         posicion = 1

@@ -8,8 +8,13 @@ class Habitat:
         self.dieta = dieta
         self.cantAnimales = 0
 
-    def agregar(self, Animal):
+    def agregarAnimal(self, Animal):
         self.animales[Animal.id] = Animal
+
+    def listarAnimales(self):
+        print("---Animales en el habitat", self.nombre, ": ")
+        for animal in self.animales.values():
+            print("Nombre:", animal.nombre, "--- ID:", animal.id)
 
 
 class Desertico(Habitat):
@@ -18,18 +23,12 @@ class Desertico(Habitat):
         self.captus = captus
         self.agua = agua
 
-    def agregar(self, Animal):
-        super.agregar(Animal)
-
 
 class Selvatico(Habitat):
     def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0, arboles = 0, rios = 0):
         super().__init__(nombre, maxTemperatura, minTemperatura, cantMaxAnimales, dieta)
         self.arboles = arboles
         self.rios = rios
-
-    def agregar(self, Animal):
-        super.agregar(Animal)
 
 
 class Acuatico(Habitat):
@@ -38,15 +37,9 @@ class Acuatico(Habitat):
         self.algas = algas
         self.corales = corales
 
-    def agregar(self, Animal):
-        super.agregar(Animal)
-
 
 class Artico(Habitat):
     def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0, glaciares = 0, iglus = 0):
         super().__init__(nombre, maxTemperatura, minTemperatura, dieta, cantMaxAnimales)
         self.glaciares = glaciares
         self.iglus = iglus
-
-    def agregar(self, Animal):
-        super.agregar(Animal)

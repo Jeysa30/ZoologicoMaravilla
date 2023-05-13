@@ -66,34 +66,48 @@ class ZoologicoController():
         self.modelo.agregarAnimalRegistro(nuevoAnimal)
 
     def agregarAnimalHabitat(self):
-        self.modelo.listarAnimales()
+        self.modelo.listarAnimalesRegistro()
         animalAgregar = int(self.vista.solicitar_dato("Ingrese el numero del animal que quiere agregar a un habitat: "))
         self.modelo.listarHabitats()
         habitatAgregar = int(self.vista.solicitar_dato("Ingrese el numero del habitat que quiere agregar al animal: "))
         animalAgregar = self.modelo.registro[animalAgregar-1]
         habitatAgregar = self.modelo.habitats[habitatAgregar-1]
-        habitatAgregar.animales[animalAgregar.id] = animalAgregar
+        habitatAgregar.agregarAnimal(animalAgregar)
         self.modelo.eliminarAnimalRegistro(animalAgregar)
 
     def modificarAlimentacion(self):
-        self.modelo.listarAnimales()
-        escogerAnimal = int(self.vista.solicitar_dato("Ingrese el numero del animal al cual desee modificar su alimentacion: "))
-        self.modelo.listarAlimentos()
-        self.vista.menuAlimento("\n--Modificaciones de los alimentos del animal: ")
+        self.modelo.listarAnimalesHabitats()
+        escogerAnimal = int(self.vista.solicitar_dato("Ingrese la id del animal al cual desea modificar su alimentacion: "))
+        escogerAnimal = self.modelo.buscarAnimalHabitatsID(escogerAnimal)
+        self.vista.menuAlimento()
         seleccion = int(self.vista.solicitar_dato("Que modificaciones quieres realizar: "))
 
         if seleccion == 1:
-            self.modelo.listaTipoAlimento()
+            dietaAnimal = escogerAnimal.dieta
+            dietaAnimal.listaTipoAlimento()
             opcion = int(self.vista.solicitar_dato("Ingrese el numero del alimento que quiere agregar: "))
-            agregar = self.modelo.alimento[opcion-1]
-            self.modelo.agregarAlimento(agregar)
-            eliminar = self.modelo.posiblesAlimentos[opcion-1]
-            self.modelo.eliminarAlimento(eliminar)
+            agregar = dietaAnimal.posiblesAlimentos[opcion-1]
+            dietaAnimal.agregarAlimento(agregar, dietaAnimal.alimento)
+            dietaAnimal.eliminarAlimento(agregar, dietaAnimal.posiblesAlimentos)
 
         elif seleccion == 2:
-            self.modelo.listarAlimentos()
+            dietaAnimal = escogerAnimal.dieta
+            dietaAnimal.listarAlimentos()
             opcion = int(self.vista.solicitar_dato("Ingrese el numero del alimento que quiere eliminar: "))
-            eliminar = self.modelo.alimento[opcion-1]
-            self.modelo.eliminarAlimento(eliminar)
-            agregar = self.modelo.posiblesAlimentos[opcion-1]
-            self.modelo.agregarAlimento(agregar)
+            eliminar = dietaAnimal.alimento[opcion-1]
+            dietaAnimal.eliminarAlimento(eliminar, dietaAnimal.alimento)
+            dietaAnimal.agregarAlimento(eliminar, dietaAnimal.posiblesAlimentos)
+
+    def accionesAnimales(self):
+        self.modelo.listarAnimalesHabitats()
+        escogerAnimal = int(self.vista.solicitar_dato("Ingrese la id del animal el cual va a realizar la accion: "))
+        escogerAnimal = self.modelo.buscarAnimalHabitatsID(escogerAnimal)
+        self.vista.menuAccion()
+        accion = int(self.vista.solicitar_dato("Ingrese la accion que va a realizar el animal: "))
+
+        if accion == 1:
+            print("")
+        elif accion == 2:
+            print("")
+        elif accion == 3:
+            print("")
