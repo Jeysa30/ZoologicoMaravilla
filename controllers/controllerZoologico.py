@@ -22,7 +22,7 @@ class ZoologicoController():
             self.modificarAlimentacion()
             return "El alimento se modifico correctamente"
         elif op == 5:
-            print("opcion 5")
+            return self.accionesAnimales()
         elif op == 6:
             print("opcion 6")
 
@@ -81,9 +81,9 @@ class ZoologicoController():
         escogerAnimal = self.modelo.buscarAnimalHabitatsID(escogerAnimal)
         self.vista.menuAlimento()
         seleccion = int(self.vista.solicitar_dato("Que modificaciones quieres realizar: "))
+        dietaAnimal = escogerAnimal.dieta
 
         if seleccion == 1:
-            dietaAnimal = escogerAnimal.dieta
             dietaAnimal.listaTipoAlimento()
             opcion = int(self.vista.solicitar_dato("Ingrese el numero del alimento que quiere agregar: "))
             agregar = dietaAnimal.posiblesAlimentos[opcion-1]
@@ -91,7 +91,6 @@ class ZoologicoController():
             dietaAnimal.eliminarAlimento(agregar, dietaAnimal.posiblesAlimentos)
 
         elif seleccion == 2:
-            dietaAnimal = escogerAnimal.dieta
             dietaAnimal.listarAlimentos()
             opcion = int(self.vista.solicitar_dato("Ingrese el numero del alimento que quiere eliminar: "))
             eliminar = dietaAnimal.alimento[opcion-1]
@@ -106,8 +105,34 @@ class ZoologicoController():
         accion = int(self.vista.solicitar_dato("Ingrese la accion que va a realizar el animal: "))
 
         if accion == 1:
-            print("")
+            comerAnimal = escogerAnimal.dieta
+            comer = int(self.vista.solicitar_dato("Ingrese la cantidad de Kg que el animal va a comer: "))
+            if (escogerAnimal.cantComerTemporal - comer) >= 0:
+                comerAnimal.listarAlimentos()
+                opcion = int(self.vista.solicitar_dato("Ingrese el numero del alimento que quiera dar al animal: "))
+                if comerAnimal.alimento[opcion-1]:
+                    escogerAnimal.cantComerTemporal -= comer
+                    return "El animal", escogerAnimal.nombre, "comio", comer, "Kg de los", escogerAnimal.cantComer, "disponibles, le quedan", escogerAnimal.cantComerTemporal, "Kg para comer."
+
+                else:
+                    return "la opcion ingresada no exite"
+
+            else:
+                return "El animal", escogerAnimal.nombre, "no puede comer", comer, "Kg, solo le quedan", escogerAnimal.cantComerTemporal, "disponibles para comer"
+
         elif accion == 2:
-            print("")
+            dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va adormir: "))
+            if (escogerAnimal.cantDormirTemporal - dormir) >= 0:
+                escogerAnimal.cantDormirTemporal -= dormir
+                return "El animal", escogerAnimal.nombre, "durmio", dormir, "horas de las", escogerAnimal.cantDormir,"disponibles, le quedan", escogerAnimal.cantDormirTemporal, "horas para dormir."
+
+            else:
+                return "El animal", escogerAnimal.nombre, "no puede dormir", dormir, "horas, solo le quedan", escogerAnimal.cantDormirTemporal, "disponibles para dormir"
+
         elif accion == 3:
-            print("")
+            if escogerAnimal.jugar == False:
+                escogerAnimal.jugar = True
+                return "El animal", escogerAnimal.nombre, "acaba de jugar."
+
+            else:
+                return "El animal ", escogerAnimal.nombre, " ya jugo en el dia."
