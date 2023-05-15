@@ -2,11 +2,16 @@ class Zoologico:
     def __init__(self, nombre = ""):
         self.nombre = nombre
         self.idAnimal = 1
-        self.habitats = []
         self.registro = []
+        if "habitats" in st.session_state:
+            self.habitats = st.session_state["habitats"]
+        else:
+            self.habitats = []
+            st.session_state["habitats"] = []
 
     def agregarHabitat(self, Habitat):
         self.habitats.append(Habitat)
+        st.session_state["habitats"] = self.habitats
 
     def agregarAnimalRegistro(self, animal):
         self.registro.append(animal)
