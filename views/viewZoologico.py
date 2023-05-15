@@ -9,6 +9,7 @@ class Zoo:
         self.controlador = zooController.ZoologicoController(self.ZoologicoMaravilla, self)
 
     def menuZoo(self):
+
         st.markdown(
             f"<h1 style='text-align: center; color: green;'>BIENVENIDO AL ZOOLÓGICO MARAVILLA</h1>",
             unsafe_allow_html=True,
@@ -36,41 +37,16 @@ class Zoo:
             st.session_state["opcion"] = 6
 
         if "opcion" in st.session_state:
-            self.controlador.ejecutar_menu(st.session_state["opcion"])
+            self.mostrarFormulario = self.controlador.ejecutar_menu(st.session_state["opcion"])
 
-        """
-        while True:
-            print(" ----- MENU -----\n")
-            print("1. Agregar un habitat.")
-            print("2. Agregar animal.")
-            print("3. Agregar un animal a un habitat.")
-            print("4. Modificar alimentacion de un animal.")
-            print("5. Acciones animales.")
-            print("6. Ver informacion del zoologico.")
-            print("0. Salir del zoologico.\n")
-            op = int(input("Ingrese la opcion: "))
-            try:
-                if op not in [0, 1, 2, 3, 4, 5, 6]:
-                    raise ValueError("Se ingreso una opción invalida, ingrese un numero entero del 0 al 5.\n")
-            except ValueError as error:
-                print(f"\nSE PRESENTO UN ERROR: {error}")
-                continue
-
-            if op == 0:
-                print("\n---GRACIAS POR VISITAR AL ZOOLOGICO MARAVILLA---")
-                break
-
-            else:
-                print(controlador.ejecutar_menu(op))
-        """
 
     def menuHabitat(self):
         opciones = {
             "": 0,
-            "Desierto(40 a 60)": 1,
-            "Selva(20 a 39)": 2,
-            "Acuatico(0 a 19)": 3,
-            "Polar(-20 a -1)": 4
+            "Desierto(40 a 60 grados)": 1,
+            "Selva(20 a 39 grados)": 2,
+            "Acuatico(0 a 19 grados)": 3,
+            "Polar(-20 a -1 grados)": 4
         }
         opcion = st.selectbox(
             "Escoge el tipo de habitat",
@@ -87,13 +63,12 @@ class Zoo:
     def elegirDieta(self):
         opcion = st.selectbox(
             "Dietas para el habitat disponibles",
-            ("","Omnivora", "Carnivora", "Herbivora")
+            ("", "Omnivoro", "Carnivoro", "Herbivoro")
         )
 
         st.write('Seleccionaste:', opcion)
 
         if opcion:
-            st.session_state["opcion_elegida"] = opcion
             return opcion
 
         else:
@@ -101,6 +76,12 @@ class Zoo:
 
     def solicitar_dato(self, mensaje):
         return st.number_input(mensaje, 1)
+
+    def solicitar_dato_string(self, mensaje):
+        return st.text_input(mensaje)
+
+    def solicitar_dato_rango(self, mensaje, min, max):
+        return st.slider(mensaje, min, max)
 
     def menuAlimento(self):
         print("\n--Modificaciones de los alimentos del animal: ")

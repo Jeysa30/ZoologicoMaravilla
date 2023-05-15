@@ -17,9 +17,13 @@ class ZoologicoController():
                 self.vista.mensajeError("Se presentó un error creando el producto")
 
         elif op == 2:
-            self.crearAnimal(self.modelo.idAnimal)
-            self.modelo.idAnimal += 1
-            return "Se creo exitosamente el animal en el registro del zoologico"
+            try:
+                self.crearAnimal(self.modelo.idAnimal)
+                self.modelo.idAnimal += 1
+
+            except ValueError:
+                self.vista.mensajeError("Se presentó un error creando el producto")
+
         elif op == 3:
             self.agregarAnimalHabitat()
             return "Se agrego el animal correctamente al habitat"
@@ -62,33 +66,41 @@ class ZoologicoController():
             botonAccion = st.button("Crear nuevo habitat")
 
         if botonAccion:
-            self.modelo.agregarHabitat(nuevaHabitat)
+            agregar = self.modelo.agregarHabitat(nuevaHabitat)
+            agregar = True
+            st.empty()
             st.success("El habitat fue creado correctamente")
 
     def crearAnimal(self, id):
-        nombre = self.vista.solicitar_dato("\nIngrese el nombre del animal: ")
-        especieAnimal = self.vista.solicitar_dato("\nIngrese la especie del animal: ")
-        temperatura = int(self.vista.solicitar_dato("\nIngrese la temperatura promedio del animal: "))
-        edad = int(self.vista.solicitar_dato("\nIngrese la edad del animal: "))
-        estadoSalud = int(self.vista.solicitar_dato("\nIngrese el estado de salud actual del animal (del 1 al 10): "))
-        cantDormir = int(self.vista.solicitar_dato("\nIngrese la cantidad de horas que puede dormir máximo: "))
-        cantComer = int(self.vista.solicitar_dato("\nIngrese la cantidad (Kg) que puede comer el animal: "))
-        dieta = dietaModel.Dieta(self.vista.elegirDieta())
-        dieta.listaDieta()
+        st.divider()
+        with st.container():
+            st.subheader("Formulario para crear un nuevo animal")
+            nombre = self.vista.solicitar_dato_string("\nIngrese el nombre del animal: ")
+            especieAnimal = self.vista.solicitar_dato_string("\nIngrese la especie del animal: ")
+            temperatura = int(self.vista.solicitar_dato_rango("\nIngrese la temperatura promedio del animal: ", -20, 60))
+            edad = int(self.vista.solicitar_dato_rango("\nIngrese la edad del animal: ", 1, 150))
+            estadoSalud = int(self.vista.solicitar_dato_rango("\nIngrese el estado de salud actual del animal (del 1 al 10): ", 1, 10))
+            cantDormir = int(self.vista.solicitar_dato_rango("\nIngrese la cantidad de horas que puede dormir máximo: ", 1, 24))
+            cantComer = int(self.vista.solicitar_dato_rango("\nIngrese la cantidad (Kg) que puede comer el animal: ", 1 , 50))
+            dieta = dietaModel.Dieta(self.vista.elegirDieta())
+            dieta.listaDieta()
 
+            boton_accion = st.button("Crear nuevo animal")
 
-        nuevoAnimal = animalModel.Animal(nombre, especieAnimal, dieta, temperatura, id, edad, estadoSalud, cantDormir, cantComer)
-        self.modelo.agregarAnimalRegistro(nuevoAnimal)
+        if boton_accion:
+            nuevoAnimal = animalModel.Animal(nombre, especieAnimal, dieta, temperatura, id, edad, estadoSalud, cantDormir, cantComer)
+            self.modelo.agregarAnimalRegistro(nuevoAnimal)
+            st.success("El animal fue creado correctamente")
 
     def agregarAnimalHabitat(self):
-        self.modelo.listarAnimalesRegistro()
-        animalAgregar = int(self.vista.solicitar_dato("Ingrese el numero del animal que quiere agregar a un habitat: "))
-        self.modelo.listarHabitats()
-        habitatAgregar = int(self.vista.solicitar_dato("Ingrese el numero del habitat que quiere agregar al animal: "))
-        animalAgregar = self.modelo.registro[animalAgregar-1]
-        habitatAgregar = self.modelo.habitats[habitatAgregar-1]
-        habitatAgregar.agregarAnimal(animalAgregar)
-        self.modelo.eliminarAnimalRegistro(animalAgregar)
+        animalAgregar = self.modelo.listarAnimalesRegistro()
+        habitatAgregar = self.modelo.listarHabitats()
+
+        boton_agregar = st.button("Agregar el animal al habitat")
+        if boton_agregar:
+            habitatAgregar.agregarAnimal(animalAgregar)
+            self.modelo.eliminarAnimalRegistro(animalAgregar)
+            st.success("El animal fue agregado al habitat correctamente")
 
     def modificarAlimentacion(self):
         self.modelo.listarAnimalesHabitats()
