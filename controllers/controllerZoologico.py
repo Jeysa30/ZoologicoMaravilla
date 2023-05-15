@@ -11,7 +11,7 @@ class ZoologicoController():
     def ejecutar_menu(self, op):
         if op == 1:
             try:
-                self.crearHabitat(self.vista.menuHabitat())
+                self.crearHabitat()
 
             except ValueError:
                 self.vista.mensajeError("Se presentó un error creando el producto")
@@ -31,61 +31,39 @@ class ZoologicoController():
         elif op == 6:
             print("opcion 6")
 
-    def crearHabitat(self, tipoHabitat):
+    def crearHabitat(self):
         st.divider()
         with st.container():
             st.subheader("Formulario para crear un nuevo habitat")
+            tipoHabitat = self.vista.menuHabitat()
             dieta = self.vista.elegirDieta()
-            cantMax = int(self.vista.solicitar_dato("Ingrese la cantidad maxima de animales en el habitat: ", key = 5))
+            cantMax = int(self.vista.solicitar_dato("Ingrese la cantidad maxima de animales en el habitat: "))
 
             if tipoHabitat == 1:
                 nuevaHabitat = habitatModel.Desertico("Desierto", 60, 40, dieta, cantMax,
-                int(self.vista.solicitar_dato("Ingrese la cantidad de captus en el habitat: ", key = 6)),
-                int(self.vista.solicitar_dato("Ingrese la cantidad de agua en el habitat:", key = 7)))
+                int(self.vista.solicitar_dato("Ingrese la cantidad de captus en el habitat: ")),
+                int(self.vista.solicitar_dato("Ingrese la cantidad de agua en el habitat:")))
 
             elif tipoHabitat == 2:
                 nuevaHabitat = habitatModel.Selvatico("Selva", 39, 20, dieta, cantMax,
-                self.vista.solicitar_dato("Ingrese la cantidad de arboles en el habitat: ", key = 8),
-                self.vista.solicitar_dato("Ingrese la cantidad de rios en el habitat: ", key = 9))
+                int(self.vista.solicitar_dato("Ingrese la cantidad de arboles en el habitat: ")),
+                int(self.vista.solicitar_dato("Ingrese la cantidad de rios en el habitat: ")))
 
             elif tipoHabitat == 3:
                 nuevaHabitat = habitatModel.Acuatico("Acuatico", 19, 0, dieta, cantMax,
-                int(self.vista.solicitar_dato("Ingrese la cantidad de algas en el habitat: ", key = 10)),
-                int(self.vista.solicitar_dato("Ingrese la cantidad de corales en el habitat: ", key = 11)))
+                int(self.vista.solicitar_dato("Ingrese la cantidad de algas en el habitat: ")),
+                int(self.vista.solicitar_dato("Ingrese la cantidad de corales en el habitat: ")))
 
             elif tipoHabitat == 4:
                 nuevaHabitat = habitatModel.Artico("Polar", -1, -20, dieta, cantMax,
-                int(self.vista.solicitar_dato("Ingrese la cantidad de glaciares en el habitat: ", key = 12)),
-                int(self.vista.solicitar_dato("Ingrese la cantidad de iglus en el habitat: ", key = 13)))
+                int(self.vista.solicitar_dato("Ingrese la cantidad de glaciares en el habitat: ")),
+                int(self.vista.solicitar_dato("Ingrese la cantidad de iglus en el habitat: ")))
 
             botonAccion = st.button("Crear nuevo habitat")
 
         if botonAccion:
             self.modelo.agregarHabitat(nuevaHabitat)
             st.success("El habitat fue creado correctamente")
-
-    #    dieta = self.vista.elegirDieta()
-    #    cantMax = int(self.vista.solicitar_dato("Ingrese la cantidad maxima de animales en el habitat: "))
-
-    #    if tipoHabitat == 1:
-    #        nuevaHabitat = habitatModel.Desertico("Desierto", 60, 40, dieta, cantMax,
-    #        int(self.vista.solicitar_dato("Ingrese la cantidad de captus en el habitat: ")),
-    #        int(self.vista.solicitar_dato("Ingrese la cantidad de agua en el habitat:")))
-    #    elif tipoHabitat == 2:
-    #        nuevaHabitat = habitatModel.Selvatico("Selva", 39, 20, dieta, cantMax,
-    #        self.vista.solicitar_dato("Ingrese la cantidad de arboles en el habitat: "),
-    #        self.vista.solicitar_dato("Ingrese la cantidad de rios en el habitat: "))
-    #    elif tipoHabitat == 3:
-    #        nuevaHabitat = habitatModel.Acuatico("Acuatico", 19, 0, dieta, cantMax,
-    #        int(self.vista.solicitar_dato("Ingrese la cantidad de algas en el habitat: ")),
-    #        int(self.vista.solicitar_dato("Ingrese la cantidad de corales en el habitat: ")))
-    #    elif tipoHabitat == 4:
-    #        nuevaHabitat = habitatModel.Artico("Polar", -1, -20, dieta, cantMax,
-    #        int(self.vista.solicitar_dato("Ingrese la cantidad de glaciares en el habitat: ")),
-    #        int(self.vista.solicitar_dato("Ingrese la cantidad de iglus en el habitat: ")))
-
-    #    self.modelo.agregarHabitat(nuevaHabitat)
-
 
     def crearAnimal(self, id):
         nombre = self.vista.solicitar_dato("\nIngrese el nombre del animal: ")

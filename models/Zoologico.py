@@ -1,3 +1,4 @@
+import streamlit as st
 class Zoologico:
     def __init__(self, nombre = ""):
         self.nombre = nombre

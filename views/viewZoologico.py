@@ -5,8 +5,8 @@ import streamlit as st
 
 class Zoo:
     def __init__(self):
-        ZoologicoMaravilla = zooModel.Zoologico("Zoologico Maravilla")
-        controlador = zooController.ZoologicoController(ZoologicoMaravilla, self)
+        self.ZoologicoMaravilla = zooModel.Zoologico("Zoologico Maravilla")
+        self.controlador = zooController.ZoologicoController(self.ZoologicoMaravilla, self)
 
     def menuZoo(self):
         st.markdown(
@@ -14,14 +14,13 @@ class Zoo:
             unsafe_allow_html=True,
         )
 
-        expander = st.expander("ZOO")
-        with expander:
-            boton_crear_habitat = st.button("Crea un habitat", 1)
-            boton_crear_animal = st.button("Crea un animal", 2)
-            boton_agregar_animal = st.button("Agrega un animal a un habitat", 3)
-            boton_crear_habitat = st.button("Modifica la alimentación de un animal", 4)
-            boton_accion_animal = st.button("Realiza una acción a un animal", 5)
-            boton_ver_zoo = st.button("Ver información del zoológico", 6)
+        with st.expander("ZOO"):
+            boton_crear_habitat = st.button("Crea un habitat")
+            boton_crear_animal = st.button("Crea un animal")
+            boton_agregar_animal = st.button("Agrega un animal a un habitat")
+            boton_modificar_alimentacion = st.button("Modifica la alimentación de un animal")
+            boton_accion_animal = st.button("Realiza una acción a un animal")
+            boton_ver_zoo = st.button("Ver información del zoológico")
 
         if boton_crear_habitat:
             st.session_state["opcion"] = 1
@@ -29,7 +28,7 @@ class Zoo:
             st.session_state["opcion"] = 2
         elif boton_agregar_animal:
             st.session_state["opcion"] = 3
-        elif boton_crear_habitat:
+        elif boton_modificar_alimentacion:
             st.session_state["opcion"] = 4
         elif boton_accion_animal:
             st.session_state["opcion"] = 5
@@ -67,6 +66,7 @@ class Zoo:
 
     def menuHabitat(self):
         opciones = {
+            "": 0,
             "Desierto(40 a 60)": 1,
             "Selva(20 a 39)": 2,
             "Acuatico(0 a 19)": 3,
@@ -74,7 +74,7 @@ class Zoo:
         }
         opcion = st.selectbox(
             "Escoge el tipo de habitat",
-            tuple(opciones.keys())
+            tuple(opciones.keys()),
         )
         st.write('Seleccionaste:', opcion)
 
@@ -84,20 +84,10 @@ class Zoo:
         else:
             return None
 
-    #    print("\nHabitats disponibles:")
-    #    print("1. Desierto(40 a 60)")
-    #    print("2. Selva(20 a 39)")
-    #    print("3. Acuatico(0 a 19)")
-    #    print("4. Polar(-20 a -1)")
-    #    opcion = int(input("Ingrese el habitat que quiere crear: "))
-    #    while opcion < 1 or opcion > 4:
-    #        opcion = int(input("Ese numero no es valido, vuelva a ingresar uno valido: "))
-    #    return opcion
-
     def elegirDieta(self):
         opcion = st.selectbox(
             "Dietas para el habitat disponibles",
-            ("Omnivora", "Carnivora", "Herbivora")
+            ("","Omnivora", "Carnivora", "Herbivora")
         )
 
         st.write('Seleccionaste:', opcion)
@@ -109,19 +99,8 @@ class Zoo:
         else:
             return None
 
-    #    print("\n Dietas para el ", mensaje, "disponibles:")
-    #    print("1. Omnivoro")
-    #    print("2. Carnivoro")
-    #    print("3. Herbivoro")
-    #    dieta = int(input("Ingrese el numero de la dieta: "))
-    #    while dieta < 1 or dieta > 3:
-    #        dieta = int(input("Ese numero no es valido, vuelva a ingresar el numero de la dieta: "))
-    #    if dieta == 1: return "Omnivoro"
-    #    elif dieta == 2: return "Carnivoro"
-    #   elif dieta == 3: return "Herbivoro"
-
-    def solicitar_dato(mensaje):
-        return st.number_input(mensaje, value = 0)
+    def solicitar_dato(self, mensaje):
+        return st.number_input(mensaje, 1)
 
     def menuAlimento(self):
         print("\n--Modificaciones de los alimentos del animal: ")

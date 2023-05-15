@@ -32,7 +32,7 @@ class Selvatico(Habitat):
 
 
 class Acuatico(Habitat):
-    def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0, algas = 0, Corales = 0):
+    def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0, algas = 0, corales = 0):
         super().__init__(nombre, maxTemperatura, minTemperatura, dieta, cantMaxAnimales)
         self.algas = algas
         self.corales = corales
