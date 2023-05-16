@@ -2,7 +2,13 @@ import streamlit as st
 class Zoologico:
     def __init__(self, nombre = ""):
         self.nombre = nombre
-        self.idAnimal = 1
+        if "idAnimal":
+            if "idAnimal" in st.session_state:
+                self.idAnimal = st.session_state["idAnimal"]
+            else:
+                self.idAnimal = 1
+                st.session_state["idAnimal"] = 1
+
         if "habitats":
             if "habitats" in st.session_state:
                 self.habitats = st.session_state["habitats"]
@@ -35,9 +41,10 @@ class Zoologico:
     def listarHabitats(self):
         opciones = [""]
         for habitat in self.habitats:
-            opciones.append(habitat.nombre)
+            texto = habitat.nombre + "-" + habitat.dieta
+            opciones.append(texto)
         opcion = st.selectbox(
-            "Escoge el animal que quieres aregar al habitat",
+            "Escoge el habitat al que vas a agregar el animal",
             opciones,
             key="listaHabitats"
         )
@@ -58,7 +65,7 @@ class Zoologico:
             opciones,
             key ="listaAnimales"
         )
-        st.write('Seleccionaste:', opcion)
+        st.write('Seleccionaste:', self.registro[opciones.index(opcion)-1].id)
 
         if opcion:
             st.session_state["opcion_elegida_animal"] = self.registro[opciones.index(opcion)-1]
@@ -67,8 +74,26 @@ class Zoologico:
             return None
 
     def listarAnimalesHabitats(self):
+        opciones = [""]
         for habitat in self.habitats:
-            habitat.listarAnimales()
+            for animal in habitat.animales:
+                opciones.append(animal.nombre)
+        opcion = st.selectbox(
+            "Escoge el animal que quieres que realice la accion",
+            opciones,
+            key="listaAnimalesHabitats"
+        )
+        st.write('Seleccionaste:', opcion)
+
+        if opcion:
+            for habitat in self.habitats:
+                for animal in habitat.animales:
+                    if animal.nombre == opcion:
+                        st.session_state["opcion_animal_zoo"] = animal
+                        return animal
+        else:
+            return None
+
 
     def buscarAnimalHabitatsID(self, id):
         for habitat in self.habitats:

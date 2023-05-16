@@ -3,7 +3,7 @@ import streamlit as st
 class Habitat:
     def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0):
         self.nombre = nombre
-        self.animales = {}
+        self.animales = []
         self.maxTemperatura = maxTemperatura
         self.minTemperatura = minTemperatura
         self.cantMaxAnimales = cantMaxAnimales
@@ -11,7 +11,8 @@ class Habitat:
         self.cantAnimales = 0
 
     def agregarAnimal(self, Animal):
-        self.animales[Animal.id] = Animal
+        self.animales.append(Animal)
+        st.session_state["animalesHabitat"] = self.animales
 
     def listarAnimales(self):
         st.write(f"Lista de animales:")

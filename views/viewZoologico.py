@@ -102,6 +102,7 @@ class Zoo:
 
         if "accion_seleccionada" in st.session_state:
             accion_seleccionada = st.session_state["accion_seleccionada"]
+            return accion_seleccionada
 
     def mensajeExitoso(self, mensaje):
         st.success(mensaje)

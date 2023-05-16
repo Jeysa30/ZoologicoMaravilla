@@ -125,10 +125,8 @@ class ZoologicoController():
     def accionesAnimales(self):
         st.divider()
         with st.container():
-            st.subheader("Acciones para realizarle al animal")
-            self.modelo.listarAnimalesHabitats()
-            escogerAnimal_Id = int(self.vista.solicitar_dato("Ingrese la id del animal el cual va a realizar la accion: "))
-            escogerAnimal = self.modelo.buscarAnimalHabitatsID(escogerAnimal_Id)
+            st.subheader("Acciones para que el animal realice")
+            escogerAnimal = self.modelo.listarAnimalesHabitats()
 
             if escogerAnimal:
                 st.write(f"Animal seleccionado: Nombre: {escogerAnimal.nombre} - ID: {escogerAnimal.id}")
@@ -153,7 +151,7 @@ class ZoologicoController():
                     st.write(f"El animal {escogerAnimal.nombre} no puede comer {comer} Kg, solo le quedan {escogerAnimal.cantComerTemporal} disponibles para comer")
 
             elif accion == 2:
-                dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va adormir: "))
+                dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va a dormir: "))
                 if (escogerAnimal.cantDormirTemporal - dormir) >= 0:
                     escogerAnimal.cantDormirTemporal -= dormir
                     return "El animal", escogerAnimal.nombre, "durmio", dormir, "horas de las", escogerAnimal.cantDormir,"disponibles, le quedan", escogerAnimal.cantDormirTemporal, "horas para dormir."

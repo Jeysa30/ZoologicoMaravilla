@@ -1,3 +1,5 @@
+import streamlit as st
+
 class Dieta:
     def __init__(self, tipoDieta = "", alimento = [], posiblesAlimentos = []):
         self.alimento = alimento
@@ -25,8 +27,18 @@ class Dieta:
         lista.remove(alimento)
 
     def listarAlimentos(self):
-        seleccionar_alimento = st.selectbox("Seleccione un alimento", self.alimento)
-        st.write("Has seleccionado:", seleccionar_alimento)
+        seleccionar_alimento = st.selectbox(
+            "Escoge el habitat al que vas a agregar el animal",
+            self.alimento,
+            key="listaAlimentos"
+        )
+        st.write('Seleccionaste:', seleccionar_alimento)
+
+        if seleccionar_alimento:
+            st.session_state["seleccionar_alimento"] = seleccionar_alimento
+            return seleccionar_alimento
+        else:
+            return None
 
     def listaTipoAlimento(self):
         posicion = 1
