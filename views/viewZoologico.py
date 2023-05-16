@@ -61,9 +61,10 @@ class Zoo:
             return None
 
     def elegirDieta(self):
+        listaDieta = ["", "Omnivoro", "Carnivoro", "Herbivoro"]
         opcion = st.selectbox(
             "Dietas para el habitat disponibles",
-            ("", "Omnivoro", "Carnivoro", "Herbivoro")
+            listaDieta
         )
 
         st.write('Seleccionaste:', opcion)

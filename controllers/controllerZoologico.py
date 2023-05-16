@@ -138,31 +138,34 @@ class ZoologicoController():
             if accion == 1:
                 comerAnimal = escogerAnimal.dieta
                 comer = int(self.vista.solicitar_dato("Ingrese la cantidad de Kg que el animal va a comer: "))
-                if (escogerAnimal.cantComerTemporal - comer) >= 0:
-                    opcion = comerAnimal.listarAlimentos()
-                    if comerAnimal.alimento[opcion]:
-                        escogerAnimal.cantComerTemporal -= comer
-                        st.write(f"El animal {escogerAnimal.nombre} comio {comer} Kg de los {escogerAnimal.cantComer} disponibles, le quedan {escogerAnimal.cantComerTemporal} Kg para comer.")
+                opcion = comerAnimal.listarAlimentos()
+                if st.button("Realizar accion"):
+
+                    if (escogerAnimal.cantComerTemporal - comer) >= 0 and comer != 0:
+                        if opcion:
+                            escogerAnimal.cantComerTemporal -= comer
+                            st.write(f"El animal {escogerAnimal.nombre} comio {comer} Kg de los {escogerAnimal.cantComer} disponibles, le quedan {escogerAnimal.cantComerTemporal} Kg para comer.")
+
+                        else:
+                            st.write("la opcion ingresada no exite")
 
                     else:
-                        st.write("la opcion ingresada no exite")
-
-                else:
-                    st.write(f"El animal {escogerAnimal.nombre} no puede comer {comer} Kg, solo le quedan {escogerAnimal.cantComerTemporal} disponibles para comer")
+                        st.write(f"El animal {escogerAnimal.nombre} no puede comer {comer} Kg, solo le quedan {escogerAnimal.cantComerTemporal} disponibles para comer")
 
             elif accion == 2:
                 dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va a dormir: "))
-                if (escogerAnimal.cantDormirTemporal - dormir) >= 0:
-                    escogerAnimal.cantDormirTemporal -= dormir
-                    return "El animal", escogerAnimal.nombre, "durmio", dormir, "horas de las", escogerAnimal.cantDormir,"disponibles, le quedan", escogerAnimal.cantDormirTemporal, "horas para dormir."
+                if st.button("Realizar accion"):
+                    if (escogerAnimal.cantDormirTemporal - dormir) >= 0 and dormir != 0:
+                        escogerAnimal.cantDormirTemporal -= dormir
+                        st.write(f"El animal {escogerAnimal.nombre} durmio {dormir} horas de los {escogerAnimal.cantDormir} disponibles, le quedan {escogerAnimal.cantDormirTemporal} horas para dormir.")
 
-                else:
-                    return "El animal", escogerAnimal.nombre, "no puede dormir", dormir, "horas, solo le quedan", escogerAnimal.cantDormirTemporal, "disponibles para dormir"
+                    else:
+                        st.write(f"El animal {escogerAnimal.nombre} no puede dormir {dormir} horas, solo le quedan {escogerAnimal.cantDormirTemporal} disponibles para dormir")
 
             elif accion == 3:
                 if escogerAnimal.jugar == False:
                     escogerAnimal.jugar = True
-                    return "El animal", escogerAnimal.nombre, "acaba de jugar."
+                    st.write(f"El animal {escogerAnimal.nombre} acaba de jugar.")
 
                 else:
-                    return "El animal ", escogerAnimal.nombre, " ya jugo en el dia."
+                    st.write(f"El animal {escogerAnimal.nombre} ya jugo en el dia.")

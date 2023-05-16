@@ -27,9 +27,12 @@ class Dieta:
         lista.remove(alimento)
 
     def listarAlimentos(self):
+        listaAlimentos = [""]
+        for alimento in self.alimento:
+            listaAlimentos.append(alimento)
         seleccionar_alimento = st.selectbox(
             "Escoge el habitat al que vas a agregar el animal",
-            self.alimento,
+            listaAlimentos,
             key="listaAlimentos"
         )
         st.write('Seleccionaste:', seleccionar_alimento)
