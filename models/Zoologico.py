@@ -56,7 +56,7 @@ class Zoologico:
         opcion = st.selectbox(
             "Escoge el animal que quieres aregar al habitat",
             opciones,
-            key="listaAnimales"
+            key ="listaAnimales"
         )
         st.write('Seleccionaste:', opcion)
 

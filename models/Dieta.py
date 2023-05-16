@@ -25,11 +25,8 @@ class Dieta:
         lista.remove(alimento)
 
     def listarAlimentos(self):
-        posicion = 1
-        print("---Alimento: ")
-        for alimentos in self.alimento:
-            print(posicion, "-", alimentos)
-            posicion += 1
+        seleccionar_alimento = st.selectbox("Seleccione un alimento", self.alimento)
+        st.write("Has seleccionado:", seleccionar_alimento)
 
     def listaTipoAlimento(self):
         posicion = 1

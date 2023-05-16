@@ -1,3 +1,5 @@
+import streamlit as st
+
 class Habitat:
     def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0):
         self.nombre = nombre
@@ -12,9 +14,9 @@ class Habitat:
         self.animales[Animal.id] = Animal
 
     def listarAnimales(self):
-        print("---Animales en el habitat", self.nombre, ": ")
+        st.write(f"Lista de animales:")
         for animal in self.animales.values():
-            print("Nombre:", animal.nombre, "--- ID:", animal.id)
+            st.write(f"Nombre: {animal.nombre} --- ID: {animal.id}")
 
 
 class Desertico(Habitat):

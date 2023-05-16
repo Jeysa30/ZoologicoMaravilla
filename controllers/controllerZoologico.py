@@ -66,9 +66,7 @@ class ZoologicoController():
             botonAccion = st.button("Crear nuevo habitat")
 
         if botonAccion:
-            agregar = self.modelo.agregarHabitat(nuevaHabitat)
-            agregar = True
-            st.empty()
+            self.modelo.agregarHabitat(nuevaHabitat)
             st.success("El habitat fue creado correctamente")
 
     def crearAnimal(self, id):
@@ -125,41 +123,48 @@ class ZoologicoController():
             dietaAnimal.agregarAlimento(eliminar, dietaAnimal.posiblesAlimentos)
 
     def accionesAnimales(self):
-        self.modelo.listarAnimalesHabitats()
-        escogerAnimal = int(self.vista.solicitar_dato("Ingrese la id del animal el cual va a realizar la accion: "))
-        escogerAnimal = self.modelo.buscarAnimalHabitatsID(escogerAnimal)
-        self.vista.menuAccion()
-        accion = int(self.vista.solicitar_dato("Ingrese la accion que va a realizar el animal: "))
+        st.divider()
+        with st.container():
+            st.subheader("Acciones para realizarle al animal")
+            self.modelo.listarAnimalesHabitats()
+            escogerAnimal_Id = int(self.vista.solicitar_dato("Ingrese la id del animal el cual va a realizar la accion: "))
+            escogerAnimal = self.modelo.buscarAnimalHabitatsID(escogerAnimal_Id)
 
-        if accion == 1:
-            comerAnimal = escogerAnimal.dieta
-            comer = int(self.vista.solicitar_dato("Ingrese la cantidad de Kg que el animal va a comer: "))
-            if (escogerAnimal.cantComerTemporal - comer) >= 0:
-                comerAnimal.listarAlimentos()
-                opcion = int(self.vista.solicitar_dato("Ingrese el numero del alimento que quiera dar al animal: "))
-                if comerAnimal.alimento[opcion-1]:
-                    escogerAnimal.cantComerTemporal -= comer
-                    return "El animal", escogerAnimal.nombre, "comio", comer, "Kg de los", escogerAnimal.cantComer, "disponibles, le quedan", escogerAnimal.cantComerTemporal, "Kg para comer."
+            if escogerAnimal:
+                st.write(f"Animal seleccionado: Nombre: {escogerAnimal.nombre} - ID: {escogerAnimal.id}")
+            else:
+                st.write("No se encontró ningún animal con el ID proporcionado.")
+
+            accion = self.vista.menuAccion()
+
+            if accion == 1:
+                comerAnimal = escogerAnimal.dieta
+                comer = int(self.vista.solicitar_dato("Ingrese la cantidad de Kg que el animal va a comer: "))
+                if (escogerAnimal.cantComerTemporal - comer) >= 0:
+                    opcion = comerAnimal.listarAlimentos()
+                    if comerAnimal.alimento[opcion]:
+                        escogerAnimal.cantComerTemporal -= comer
+                        st.write(f"El animal {escogerAnimal.nombre} comio {comer} Kg de los {escogerAnimal.cantComer} disponibles, le quedan {escogerAnimal.cantComerTemporal} Kg para comer.")
+
+                    else:
+                        st.write("la opcion ingresada no exite")
 
                 else:
-                    return "la opcion ingresada no exite"
+                    st.write(f"El animal {escogerAnimal.nombre} no puede comer {comer} Kg, solo le quedan {escogerAnimal.cantComerTemporal} disponibles para comer")
 
-            else:
-                return "El animal", escogerAnimal.nombre, "no puede comer", comer, "Kg, solo le quedan", escogerAnimal.cantComerTemporal, "disponibles para comer"
+            elif accion == 2:
+                dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va adormir: "))
+                if (escogerAnimal.cantDormirTemporal - dormir) >= 0:
+                    escogerAnimal.cantDormirTemporal -= dormir
+                    return "El animal", escogerAnimal.nombre, "durmio", dormir, "horas de las", escogerAnimal.cantDormir,"disponibles, le quedan", escogerAnimal.cantDormirTemporal, "horas para dormir."
 
-        elif accion == 2:
-            dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va adormir: "))
-            if (escogerAnimal.cantDormirTemporal - dormir) >= 0:
-                escogerAnimal.cantDormirTemporal -= dormir
-                return "El animal", escogerAnimal.nombre, "durmio", dormir, "horas de las", escogerAnimal.cantDormir,"disponibles, le quedan", escogerAnimal.cantDormirTemporal, "horas para dormir."
+                else:
+                    return "El animal", escogerAnimal.nombre, "no puede dormir", dormir, "horas, solo le quedan", escogerAnimal.cantDormirTemporal, "disponibles para dormir"
 
-            else:
-                return "El animal", escogerAnimal.nombre, "no puede dormir", dormir, "horas, solo le quedan", escogerAnimal.cantDormirTemporal, "disponibles para dormir"
+            elif accion == 3:
+                if escogerAnimal.jugar == False:
+                    escogerAnimal.jugar = True
+                    return "El animal", escogerAnimal.nombre, "acaba de jugar."
 
-        elif accion == 3:
-            if escogerAnimal.jugar == False:
-                escogerAnimal.jugar = True
-                return "El animal", escogerAnimal.nombre, "acaba de jugar."
-
-            else:
-                return "El animal ", escogerAnimal.nombre, " ya jugo en el dia."
+                else:
+                    return "El animal ", escogerAnimal.nombre, " ya jugo en el dia."

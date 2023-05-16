@@ -75,7 +75,7 @@ class Zoo:
             return None
 
     def solicitar_dato(self, mensaje):
-        return st.number_input(mensaje, 1)
+        return st.number_input(mensaje, 0)
 
     def solicitar_dato_string(self, mensaje):
         return st.text_input(mensaje)
@@ -89,10 +89,19 @@ class Zoo:
         print("2. Eliminar alguna comida.")
 
     def menuAccion(self):
-        print("\n--Acciones que puede realizar el animal ")
-        print("1. Comer.")
-        print("2. Dormir.")
-        print("3. Jugar.")
+        st.markdown("Acciones que puede realizar el animal")
+
+        if st.button("Comer"):
+            st.session_state["accion_seleccionada"] = 1
+
+        if st.button("Dormir"):
+            st.session_state["accion_seleccionada"] = 2
+
+        if st.button("Jugar"):
+            st.session_state["accion_seleccionada"] = 3
+
+        if "accion_seleccionada" in st.session_state:
+            accion_seleccionada = st.session_state["accion_seleccionada"]
 
     def mensajeExitoso(self, mensaje):
         st.success(mensaje)
