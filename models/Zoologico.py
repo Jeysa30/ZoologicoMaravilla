@@ -41,7 +41,7 @@ class Zoologico:
     def listarHabitats(self):
         opciones = [""]
         for habitat in self.habitats:
-            texto = str(habitat.nombre) + " - " + str(habitat.dieta)
+            texto = habitat.nombre + " - " + habitat.dieta
             opciones.append(texto)
         opcion = st.selectbox(
             "Escoge el habitat al que vas a agregar el animal",
@@ -74,22 +74,22 @@ class Zoologico:
         else:
             return None
 
-    def listarAnimalesHabitats(self):
+    def listarAnimalesHabitats(self, mensaje):
         opciones = [""]
         for habitat in self.habitats:
             for animal in habitat.animales:
-                opciones.append(animal.nombre)
+                texto = str(animal.id) + " - " + animal.nombre + " - " + animal.dieta.tipoDieta
+                opciones.append(texto)
         opcion = st.selectbox(
-            "Escoge el animal que quieres que realice la accion",
+            mensaje,
             opciones,
             key="listaAnimalesHabitats"
         )
-        st.write('Seleccionaste:', opcion)
 
         if opcion:
             for habitat in self.habitats:
                 for animal in habitat.animales:
-                    if animal.nombre == opcion:
+                    if str(animal.id) + " - " + animal.nombre + " - " + animal.dieta.tipoDieta == opcion:
                         st.session_state["opcion_animal_zoo"] = animal
                         return animal
         else:

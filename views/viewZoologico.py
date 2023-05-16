@@ -85,9 +85,17 @@ class Zoo:
         return st.slider(mensaje, min, max)
 
     def menuAlimento(self):
-        print("\n--Modificaciones de los alimentos del animal: ")
-        print("1. Agregar una nueva comida." )
-        print("2. Eliminar alguna comida.")
+        st.markdown("Que modificacion desea realizar")
+
+        if st.button("Agregar una nueva comida"):
+            st.session_state["accion_select"] = 1
+
+        if st.button("Eliminar alguna comida"):
+            st.session_state["accion_select"] = 2
+
+        if "accion_select" in st.session_state:
+            accion_select = st.session_state["accion_select"]
+            return accion_select
 
     def menuAccion(self):
         st.markdown("Acciones que puede realizar el animal")

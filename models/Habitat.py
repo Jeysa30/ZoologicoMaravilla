@@ -29,7 +29,7 @@ class Desertico(Habitat):
 
 class Selvatico(Habitat):
     def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0, arboles = 0, rios = 0):
-        super().__init__(nombre, maxTemperatura, minTemperatura, cantMaxAnimales, dieta)
+        super().__init__(nombre, maxTemperatura, minTemperatura, dieta, cantMaxAnimales)
         self.arboles = arboles
         self.rios = rios
 
