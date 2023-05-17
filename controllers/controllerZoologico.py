@@ -18,7 +18,7 @@ class ZoologicoController():
 
         elif op == 2:
             try:
-                self.crearAnimal(self.modelo.idAnimal)
+                self.crearAnimal()
                 self.modelo.idAnimal += 1
 
             except ValueError:
@@ -65,11 +65,13 @@ class ZoologicoController():
             botonAccion = st.button("Crear nuevo habitat")
 
         if botonAccion:
-            self.modelo.agregarHabitat(nuevaHabitat)
-            st.success("El habitat fue creado correctamente")
+            if tipoHabitat and dieta and cantMax != 0:
+                self.modelo.agregarHabitat(nuevaHabitat)
+                st.success("El habitat fue creado correctamente")
+            else:
+                st.error("Faltan datos por llenar, llene los datos para poder crear el animal")
 
-
-    def crearAnimal(self, id):
+    def crearAnimal(self):
         st.divider()
         with st.container():
             st.subheader("Formulario para crear un nuevo animal")
@@ -80,25 +82,32 @@ class ZoologicoController():
             estadoSalud = int(self.vista.solicitar_dato_rango("\nIngrese el estado de salud actual del animal (del 1 al 10): ", 1, 10))
             cantDormir = int(self.vista.solicitar_dato_rango("\nIngrese la cantidad de horas que puede dormir máximo: ", 1, 24))
             cantComer = int(self.vista.solicitar_dato_rango("\nIngrese la cantidad (Kg) que puede comer el animal: ", 1 , 50))
-            dieta = dietaModel.Dieta(self.vista.elegirDieta())
-            dieta.listaDieta()
+            dieta = self.vista.elegirDieta()
 
             boton_accion = st.button("Crear nuevo animal")
 
         if boton_accion:
-            nuevoAnimal = animalModel.Animal(nombre, especieAnimal, dieta, temperatura, id, edad, estadoSalud, cantDormir, cantComer)
-            self.modelo.agregarAnimalRegistro(nuevoAnimal)
-            st.success("El animal fue creado correctamente")
+            if nombre != "" and especieAnimal != "" and dieta:
+                dieta = dietaModel.Dieta(dieta)
+                dieta.listaDieta()
+                nuevoAnimal = animalModel.Animal(nombre, especieAnimal, dieta, temperatura, self.modelo.idAnimal, edad, estadoSalud, cantDormir, cantComer)
+                self.modelo.agregarAnimalRegistro(nuevoAnimal)
+                st.success("El animal fue creado correctamente")
+                st.success(nuevoAnimal.id)
+            else:
+                st.error("Faltan datos por llenar, llene los datos para poder crear el animal")
 
     def agregarAnimalHabitat(self):
         animalAgregar = self.modelo.listarAnimalesRegistro()
-        habitatAgregar = self.modelo.listarHabitats()
+        if animalAgregar:
+            habitatAgregar = self.modelo.listarHabitats(animalAgregar)
 
-        boton_agregar = st.button("Agregar el animal al habitat")
-        if boton_agregar:
-            habitatAgregar.agregarAnimal(animalAgregar)
-            self.modelo.eliminarAnimalRegistro(animalAgregar)
-            st.success("El animal fue agregado al habitat correctamente")
+            boton_agregar = st.button("Agregar el animal al habitat")
+            if boton_agregar:
+                habitatAgregar.agregarAnimal(animalAgregar)
+                self.modelo.eliminarAnimalRegistro(animalAgregar)
+                habitatAgregar.cantAnimales += 1
+                st.success("El animal fue agregado al habitat correctamente")
 
     def modificarAlimentacion(self):
         st.divider()
@@ -142,7 +151,6 @@ class ZoologicoController():
                     comer = int(self.vista.solicitar_dato("Ingrese la cantidad de Kg que el animal va a comer: "))
                     opcion = comerAnimal.listarAlimentos()
                     if st.button("Realizar accion"):
-
                         if (escogerAnimal.cantComerTemporal - comer) >= 0 and comer != 0:
                             if opcion:
                                 escogerAnimal.cantComerTemporal -= comer
@@ -157,6 +165,7 @@ class ZoologicoController():
                 elif accion == 2:
                     dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va a dormir: "))
                     if st.button("Realizar accion"):
+                        st.session_state["accion_seleccionada"] = st.empty()
                         if (escogerAnimal.cantDormirTemporal - dormir) >= 0 and dormir != 0:
                             escogerAnimal.cantDormirTemporal -= dormir
                             st.write(f"El animal {escogerAnimal.nombre} durmio {dormir} horas de los {escogerAnimal.cantDormir} disponibles, le quedan {escogerAnimal.cantDormirTemporal} horas para dormir.")

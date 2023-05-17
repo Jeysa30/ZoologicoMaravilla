@@ -54,7 +54,7 @@ class Zoo:
         )
         st.write('Seleccionaste:', opcion)
 
-        if opcion:
+        if opcion != "" and opcion in tuple(opciones.keys()):
             st.session_state["opcion_elegida"] = opciones[opcion]
             return opciones[opcion]
         else:
@@ -69,7 +69,7 @@ class Zoo:
 
         st.write('Seleccionaste:', opcion)
 
-        if opcion:
+        if opcion != "" and opcion in listaDieta:
             return opcion
 
         else:

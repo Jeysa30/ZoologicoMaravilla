@@ -38,11 +38,12 @@ class Zoologico:
         self.registro.remove(animal)
         st.session_state["registro"] = self.registro
 
-    def listarHabitats(self):
+    def listarHabitats(self, animal):
         opciones = [""]
         for habitat in self.habitats:
-            texto = habitat.nombre + " - " + habitat.dieta
-            opciones.append(texto)
+            if habitat.dieta == animal.dieta.tipoDieta and (habitat.cantAnimales)+1 <= habitat.cantMaxAnimales and habitat.minTemperatura <= animal.temperatura and habitat.maxTemperatura >= animal.temperatura:
+                texto = habitat.nombre + " - " + habitat.dieta
+                opciones.append(texto)
         opcion = st.selectbox(
             "Escoge el habitat al que vas a agregar el animal",
             opciones,
@@ -59,8 +60,8 @@ class Zoologico:
     def listarAnimalesRegistro(self):
         opciones = [""]
         for animal in self.registro:
-            texto = str(animal.id) + " - " + animal.nombre + " - "  + animal.dieta.tipoDieta
-            opciones.append(texto)
+                texto = str(animal.id) + " - " + animal.nombre + " - "  + animal.dieta.tipoDieta
+                opciones.append(texto)
         opcion = st.selectbox(
             "Escoge el animal que quieres aregar al habitat",
             opciones,
