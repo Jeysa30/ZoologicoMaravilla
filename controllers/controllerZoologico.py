@@ -19,7 +19,7 @@ class ZoologicoController():
         elif op == 2:
             try:
                 self.crearAnimal()
-                self.modelo.idAnimal += 1
+
 
             except ValueError:
                 self.vista.mensajeError("Se presentó un error creando el producto")
@@ -90,10 +90,12 @@ class ZoologicoController():
             if nombre != "" and especieAnimal != "" and dieta:
                 dieta = dietaModel.Dieta(dieta)
                 dieta.listaDieta()
-                nuevoAnimal = animalModel.Animal(nombre, especieAnimal, dieta, temperatura, self.modelo.idAnimal, edad, estadoSalud, cantDormir, cantComer)
+                nuevoAnimal = animalModel.Animal(nombre, especieAnimal, dieta, temperatura, st.session_state["idAnimal"], edad, estadoSalud, cantDormir, cantComer)
                 self.modelo.agregarAnimalRegistro(nuevoAnimal)
                 st.success("El animal fue creado correctamente")
                 st.success(nuevoAnimal.id)
+                self.modelo.idAnimal += 1
+                st.session_state["idAnimal"] = self.modelo.idAnimal
             else:
                 st.error("Faltan datos por llenar, llene los datos para poder crear el animal")
 
