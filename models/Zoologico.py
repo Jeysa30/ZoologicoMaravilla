@@ -9,6 +9,13 @@ class Zoologico:
                 self.idAnimal = 1
                 st.session_state["idAnimal"] = 1
 
+        if "idHabitat":
+            if "idHabitat" in st.session_state:
+                self.idHabitat = st.session_state["idHabitat"]
+            else:
+                self.idHabitat = 1
+                st.session_state["idHabitat"] = 1
+
         if "habitats":
             if "habitats" in st.session_state:
                 self.habitats = st.session_state["habitats"]
@@ -40,9 +47,11 @@ class Zoologico:
 
     def listarHabitats(self, animal):
         opciones = [""]
+        posicionesHabitat = []
         for habitat in self.habitats:
             if habitat.dieta == animal.dieta.tipoDieta and (habitat.cantAnimales)+1 <= habitat.cantMaxAnimales and habitat.minTemperatura <= animal.temperatura and habitat.maxTemperatura >= animal.temperatura:
                 texto = habitat.nombre + " - " + habitat.dieta
+                posicionesHabitat.append(habitat.id)
                 opciones.append(texto)
         opcion = st.selectbox(
             "Escoge el habitat al que vas a agregar el animal",
@@ -52,8 +61,9 @@ class Zoologico:
         st.write('Seleccionaste:', opcion)
 
         if opcion:
-            st.session_state["opcion_elegida_habitat"] = self.habitats[opciones.index(opcion)-1]
-            return self.habitats[opciones.index(opcion)-1]
+            numeroHabitat = posicionesHabitat[opciones.index((opcion))-1]
+            st.session_state["opcion_elegida_habitat"] = self.habitats[numeroHabitat-1]
+            return self.habitats[numeroHabitat-1]
         else:
             return None
 
@@ -97,7 +107,27 @@ class Zoologico:
             return None
 
 
-    def buscarAnimalHabitatsID(self, id):
-        for habitat in self.habitats:
-            if habitat.animales[id]:
-                return habitat.animales[id]
+    def mostrarTodoZoo(self):
+        if self.habitats:
+            for habitat in self.habitats:
+                with st.expander(habitat.nombre):
+                    st.subheader("Informacion habitat")
+                    st.write("Tipo de habitat: ", habitat.nombre)
+                    st.write("Cantidad animales: ", habitat.cantAnimales)
+                    st.write("Cantidad Maxima Animales: ", habitat.cantMaxAnimales)
+                    st.write("Dieta: ", habitat.dieta)
+                    st.divider()
+                    if habitat.animales:
+                        st.subheader("Animales:")
+                        for animal in habitat.animales:
+                            st.subheader(animal.nombre)
+                            st.write("ID: ", animal.id)
+                            st.write("Especie: ", animal.especieAnimal)
+                            st.write("Edad: ", animal.edad)
+                            st.write("Estado de salud: ", animal.estadoSalud)
+                            st.write("Dieta: ", animal.dieta.tipoDieta)
+                            st.divider()
+                    else:
+                        st.error("Este habitat no tiene animales, puede agregar uno en la opcion del menu.")
+        else:
+            st.error("El zoologico no tiene habitats, puede agregar uno en la opcion del menu.")
