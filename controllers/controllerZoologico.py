@@ -67,9 +67,9 @@ class ZoologicoController():
         if botonAccion:
             if tipoHabitat and dieta and cantMax != 0:
                 self.modelo.agregarHabitat(nuevaHabitat)
-                st.success("El habitat fue creado correctamente")
+                self.vista.mensajeExitoso("El habitat fue creado correctamente")
             else:
-                st.error("Faltan datos por llenar, llene los datos para poder crear el animal")
+                self.vista.mensajeError("Faltan datos por llenar, llene los datos para poder crear el animal")
 
     def crearAnimal(self):
         st.divider()
@@ -92,12 +92,11 @@ class ZoologicoController():
                 dieta.listaDieta()
                 nuevoAnimal = animalModel.Animal(nombre, especieAnimal, dieta, temperatura, st.session_state["idAnimal"], edad, estadoSalud, cantDormir, cantComer)
                 self.modelo.agregarAnimalRegistro(nuevoAnimal)
-                st.success("El animal fue creado correctamente")
-                st.success(nuevoAnimal.id)
+                self.vista.mensajeExitoso("El animal fue creado correctamente")
                 self.modelo.idAnimal += 1
                 st.session_state["idAnimal"] = self.modelo.idAnimal
             else:
-                st.error("Faltan datos por llenar, llene los datos para poder crear el animal")
+                self.vista.mensajeError("Faltan datos por llenar, llene los datos para poder crear el animal")
 
     def agregarAnimalHabitat(self):
         animalAgregar = self.modelo.listarAnimalesRegistro()
@@ -106,10 +105,13 @@ class ZoologicoController():
 
             boton_agregar = st.button("Agregar el animal al habitat")
             if boton_agregar:
-                habitatAgregar.agregarAnimal(animalAgregar)
-                self.modelo.eliminarAnimalRegistro(animalAgregar)
-                habitatAgregar.cantAnimales += 1
-                st.success("El animal fue agregado al habitat correctamente")
+                if habitatAgregar != "":
+                    habitatAgregar.agregarAnimal(animalAgregar)
+                    self.modelo.eliminarAnimalRegistro(animalAgregar)
+                    habitatAgregar.cantAnimales += 1
+                    self.vista.mensajeExitoso("El animal fue agregado al habitat correctamente")
+                else:
+                    self.vista.mensajeError("no has seleccionado a ningun habitat para agregar al animal")
 
     def modificarAlimentacion(self):
         st.divider()
@@ -126,9 +128,9 @@ class ZoologicoController():
                         if agregar in dietaAnimal.posiblesAlimentos:
                             dietaAnimal.agregarAlimento(agregar, dietaAnimal.alimento)
                             dietaAnimal.eliminarAlimento(agregar, dietaAnimal.posiblesAlimentos)
-                            st.success("El alimento se agrego correctamente")
+                            self.vista.mensajeExitoso("El alimento se agrego correctamente")
                         else:
-                            st.error("Ese elmento no se puede agregar a los alimentos del animal")
+                            self.vista.mensajeError("Ese elmento no se puede agregar a los alimentos del animal")
                 elif seleccion == 2:
                     eliminar = dietaAnimal.listarAlimentos()
                     if st.button("Realizar accion"):
@@ -136,9 +138,9 @@ class ZoologicoController():
                         if eliminar in dietaAnimal.alimento:
                             dietaAnimal.eliminarAlimento(eliminar, dietaAnimal.alimento)
                             dietaAnimal.agregarAlimento(eliminar, dietaAnimal.posiblesAlimentos)
-                            st.success("El alimento se elimino correctamente")
+                            self.vista.mensajeExitoso("El alimento se elimino correctamente")
                         else:
-                            st.error("Ese elmento no se puede eliminar de los alimentos del animal")
+                            self.vista.mensajeError("Ese elmento no se puede eliminar de los alimentos del animal")
 
     def accionesAnimales(self):
         st.divider()
@@ -153,13 +155,14 @@ class ZoologicoController():
                     comer = int(self.vista.solicitar_dato("Ingrese la cantidad de Kg que el animal va a comer: "))
                     opcion = comerAnimal.listarAlimentos()
                     if st.button("Realizar accion"):
+                        st.divider()
                         if (escogerAnimal.cantComerTemporal - comer) >= 0 and comer != 0:
                             if opcion:
                                 escogerAnimal.cantComerTemporal -= comer
-                                st.write(f"El animal {escogerAnimal.nombre} comio {comer} Kg de los {escogerAnimal.cantComer} disponibles, le quedan {escogerAnimal.cantComerTemporal} Kg para comer.")
+                                self.vista.mensajeExitoso(f"El animal {escogerAnimal.nombre} comio {comer} Kg de los {escogerAnimal.cantComer} disponibles, le quedan {escogerAnimal.cantComerTemporal} Kg para comer.")
 
                             else:
-                                st.write("la opcion ingresada no exite")
+                                self.vista.mensajeError("la opcion ingresada no exite")
 
                         else:
                             st.write(f"El animal {escogerAnimal.nombre} no puede comer {comer} Kg, solo le quedan {escogerAnimal.cantComerTemporal} disponibles para comer")
@@ -168,18 +171,20 @@ class ZoologicoController():
                     dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va a dormir: "))
                     if st.button("Realizar accion"):
                         st.session_state["accion_seleccionada"] = st.empty()
+                        st.divider()
                         if (escogerAnimal.cantDormirTemporal - dormir) >= 0 and dormir != 0:
                             escogerAnimal.cantDormirTemporal -= dormir
-                            st.write(f"El animal {escogerAnimal.nombre} durmio {dormir} horas de los {escogerAnimal.cantDormir} disponibles, le quedan {escogerAnimal.cantDormirTemporal} horas para dormir.")
+                            self.vista.mensajeExitoso(f"El animal {escogerAnimal.nombre} durmio {dormir} horas de los {escogerAnimal.cantDormir} disponibles, le quedan {escogerAnimal.cantDormirTemporal} horas para dormir.")
 
                         else:
-                            st.write(f"El animal {escogerAnimal.nombre} no puede dormir {dormir} horas, solo le quedan {escogerAnimal.cantDormirTemporal} disponibles para dormir")
+                            self.vista.mensajeError(f"El animal {escogerAnimal.nombre} no puede dormir {dormir} horas, solo le quedan {escogerAnimal.cantDormirTemporal} disponibles para dormir")
 
                 elif accion == 3:
                     st.session_state["accion_seleccionada"] = st.empty()
+                    st.divider()
                     if escogerAnimal.jugar == False:
                         escogerAnimal.jugar = True
-                        st.write(f"El animal {escogerAnimal.nombre} acaba de jugar.")
+                        self.vista.mensajeExitoso(f"El animal {escogerAnimal.nombre} acaba de jugar.")
 
                     else:
                         st.write(f"El animal {escogerAnimal.nombre} ya jugo en el dia.")

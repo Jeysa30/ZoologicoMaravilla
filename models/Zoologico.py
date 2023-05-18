@@ -60,7 +60,7 @@ class Zoologico:
     def listarAnimalesRegistro(self):
         opciones = [""]
         for animal in self.registro:
-                texto = str(animal.id) + " - " + animal.nombre + " - "  + animal.dieta.tipoDieta
+                texto = "ID: " + str(animal.id) + " - " + "Nombre: " + animal.nombre + " - "  + "Dieta: " + animal.dieta.tipoDieta
                 opciones.append(texto)
         opcion = st.selectbox(
             "Escoge el animal que quieres aregar al habitat",
@@ -79,7 +79,7 @@ class Zoologico:
         opciones = [""]
         for habitat in self.habitats:
             for animal in habitat.animales:
-                texto = str(animal.id) + " - " + animal.nombre + " - " + animal.dieta.tipoDieta
+                texto = "ID: " + str(animal.id) + " - " + "Nombre: " +  animal.nombre + " - " + "Dieta: " +  animal.dieta.tipoDieta
                 opciones.append(texto)
         opcion = st.selectbox(
             mensaje,
