@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import streamlit as st
 class Zoologico:
     def __init__(self, nombre = ""):
@@ -100,7 +101,7 @@ class Zoologico:
         if opcion:
             for habitat in self.habitats:
                 for animal in habitat.animales:
-                    if str(animal.id) + " - " + animal.nombre + " - " + animal.dieta.tipoDieta == opcion:
+                    if "ID: " + str(animal.id) + " - " + "Nombre: " +  animal.nombre + " - " + "Dieta: " +  animal.dieta.tipoDieta == opcion:
                         st.session_state["opcion_animal_zoo"] = animal
                         return animal
         else:
@@ -108,7 +109,9 @@ class Zoologico:
 
 
     def mostrarTodoZoo(self):
+        st.divider()
         if self.habitats:
+            st.subheader("Lista de habitats creados y su información")
             for habitat in self.habitats:
                 with st.expander(habitat.nombre):
                     st.subheader("Informacion habitat")
