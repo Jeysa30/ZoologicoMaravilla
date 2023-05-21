@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 import streamlit as st
+
+#Creamos la clase del zoológico como model, ya que esta se hara cargo de guardar 3 cosas: los habitat creados, los animales que no estan
+# agregados a ningún habitat y los ID correspondientes a cada habitat y a cada animal.
 class Zoologico:
     def __init__(self, nombre = ""):
         self.nombre = nombre
@@ -42,10 +45,14 @@ class Zoologico:
         self.registro.append(animal)
         st.session_state["registro"] = self.registro
 
+    #Este metodo estara a cargo de eliminar un animal del registro del zoológico ya que pasara a estar guardado en un habitat
+    #seleccionado por el usuario.
     def eliminarAnimalRegistro(self, animal):
         self.registro.remove(animal)
         st.session_state["registro"] = self.registro
 
+    #Este metodo permitira listar los habitats que el usuario puede escoger dependiendo de la temperatura y dieta
+    # del animal seleccionado anteriormente para guardarlo.
     def listarHabitats(self, animal):
         opciones = [""]
         posicionesHabitat = []
@@ -68,6 +75,7 @@ class Zoologico:
         else:
             return None
 
+    #Este metodo le muestra al usuario los animales que no estan en ningún habitat permitiendo seleccionarlo para poder agregarlo a uno.
     def listarAnimalesRegistro(self):
         opciones = [""]
         for animal in self.registro:
@@ -86,6 +94,7 @@ class Zoologico:
         else:
             return None
 
+    #En este metodo listara los animales que hay en cada habitat.
     def listarAnimalesHabitats(self, mensaje):
         opciones = [""]
         for habitat in self.habitats:
@@ -106,31 +115,3 @@ class Zoologico:
                         return animal
         else:
             return None
-
-
-    def mostrarTodoZoo(self):
-        st.divider()
-        if self.habitats:
-            st.subheader("Lista de habitats creados y su información")
-            for habitat in self.habitats:
-                with st.expander(habitat.nombre):
-                    st.subheader("Informacion habitat")
-                    st.write("Tipo de habitat: ", habitat.nombre)
-                    st.write("Cantidad animales: ", habitat.cantAnimales)
-                    st.write("Cantidad Maxima Animales: ", habitat.cantMaxAnimales)
-                    st.write("Dieta: ", habitat.dieta)
-                    st.divider()
-                    if habitat.animales:
-                        st.subheader("Animales:")
-                        for animal in habitat.animales:
-                            st.subheader(animal.nombre)
-                            st.write("ID: ", animal.id)
-                            st.write("Especie: ", animal.especieAnimal)
-                            st.write("Edad: ", animal.edad)
-                            st.write("Estado de salud: ", animal.estadoSalud)
-                            st.write("Dieta: ", animal.dieta.tipoDieta)
-                            st.divider()
-                    else:
-                        st.error("Este habitat no tiene animales, puede agregar uno en la opcion del menu.")
-        else:
-            st.error("El zoologico no tiene habitats, puede agregar uno en la opcion del menu.")

@@ -1,5 +1,8 @@
 import streamlit as st
 
+#La creación de la clase habitat(que es la clase padre) como model, es el que guardara el animal según su temperatura y dieta a un habitat especifico(ya que el habitat
+# tambien cuenta con atributo de temperatura fijo para 4 tipos de habitat, pero que pueden crearce más habitat según el tipo de dieta
+# que el usuario quiere que se maneje en dicho habitat).
 class Habitat:
     def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0, id = 0):
         self.nombre = nombre
@@ -15,12 +18,8 @@ class Habitat:
         self.animales.append(Animal)
         st.session_state["animalesHabitat"] = self.animales
 
-    def listarAnimales(self):
-        st.write(f"Lista de animales:")
-        for animal in self.animales.values():
-            st.write(f"Nombre: {animal.nombre} --- ID: {animal.id}")
-
-
+#Hacemos uso de herencia en la clase de habitat para los 4 tipos de habitats que pueden haber en el zoológico, con su temperatura
+# ya fija, y con otros 2 atributos haciendo referencia a su habitat
 class Desertico(Habitat):
     def __init__(self, nombre = "", maxTemperatura = 0, minTemperatura = 0, dieta = "", cantMaxAnimales = 0, id = 0, captus = 0, agua = 0):
         super().__init__(nombre, maxTemperatura, minTemperatura, dieta, cantMaxAnimales, id)
