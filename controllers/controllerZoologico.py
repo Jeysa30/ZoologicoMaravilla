@@ -13,7 +13,7 @@ class ZoologicoController():
         self.vista = vista
 
     #Este es el metodo que recibira la selección del usuario y ejecutara la lógica correspondiente para cada opción:
-    def ejecutar_menu(self, op):
+    def ejecutarMenu(self, op):
         if op == 1:
             try:
                 self.crearHabitat()
@@ -160,7 +160,7 @@ class ZoologicoController():
                 dietaAnimal = escogerAnimal.dieta
                 if seleccion == 1:
                     #si la opción es agregar se le muestra al usuario la lista de posibles alimentos según su dieta
-                    agregar = dietaAnimal.listaTipoAlimento()
+                    agregar = dietaAnimal.listaPosiblesAlimentos()
                     if st.button("Realizar acción"):
                         st.session_state["accion_select"] = st.empty()
                         if agregar in dietaAnimal.posiblesAlimentos:

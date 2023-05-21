@@ -63,7 +63,7 @@ class Dieta:
 
     #Este metodo es casi igual al anterior solo que este recorre el de la lista de posibles alimentos que puede escoger el usuario
     #para agregarlo a la lista de alimentación del animal mediante la opcion de acciones.
-    def listaTipoAlimento(self):
+    def listaPosiblesAlimentos(self):
         listaAlimentosPosibles = [""]
         for alimentoPosibles in self.posiblesAlimentos:
             listaAlimentosPosibles.append(alimentoPosibles)

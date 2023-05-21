@@ -44,7 +44,7 @@ class Zoo:
             st.session_state["opcion"] = 6
 
         if "opcion" in st.session_state:
-            self.mostrarFormulario = self.controlador.ejecutar_menu(st.session_state["opcion"])
+            self.mostrarFormulario = self.controlador.ejecutarMenu(st.session_state["opcion"])
 
     #Hicimos este metodo con el fin de mostrarle al usuario los habitats junto con su temperatura para el momento en que desea crear
     #un habitat.
