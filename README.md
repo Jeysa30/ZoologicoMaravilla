@@ -153,23 +153,23 @@ están en el modelo y la vista para así implementar toda la lógica necesaria.
 
 # Evidencia del funcionamiento del programa
 
-* Menú principal del zoológico
+* __Menú principal del zoológico__
 : ![Menu principal.jpg](Menu%20principal.jpg)
 
-* Se muestra la opción donde se crear un habitat
+* __Se muestra la opción donde se crear un habitat__
 :  
 
 -Creamos el habitat polar
 ![Se crea el habitat.jpg](Se%20crea%20el%20habitat.jpg)
 
-* Se muestra la opción donde se crea un animal
+* __Se muestra la opción donde se crea un animal__
 : ![Crea y agrega un animal al zoologico 1.jpg](Crea%20y%20agrega%20un%20animal%20al%20zoologico%201.jpg)
 ![Crea y agrega un animal al zoologico 2.jpg](Crea%20y%20agrega%20un%20animal%20al%20zoologico%202.jpg)
 
-* Se agrega el animal a un habitat si cumple los requisitos
+* __Se agrega el animal a un habitat si cumple los requisitos__
 : ![agregar un animal a un habitat .jpg](agregar%20un%20animal%20a%20un%20habitat%20.jpg)
 
-* Se modifica el alimento del animal ya estando en el habitat
+* __Se modifica el alimento del animal ya estando en el habitat__
 :  
  
 -Agregar alimento
@@ -187,7 +187,7 @@ están en el modelo y la vista para así implementar toda la lógica necesaria.
 -Acción de jugar
 ![animal jugar.jpg](animal%20jugar.jpg)
 
-* Por ultimo se puede ver la información del zoológico
+* __Por ultimo se puede ver la información del zoológico__
 : ![ver informacion.jpg](ver%20informacion.jpg)
 ![ver info 1.jpg](ver%20info%201.jpg)
 ![ver info 2.jpg](ver%20info%202.jpg)
