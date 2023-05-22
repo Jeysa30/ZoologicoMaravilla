@@ -20,11 +20,14 @@ Nuestro programa esta implementado con el sistema de modelo, vista y controlador
 En el modelo de nuestro programa se encuentran las clases principales, que son las siguientes:
 
 * Zoologico
-: Nuestra clase zoologico contiene una lista de habitats y un registro de los animales que
+:  
+  Nuestra clase zoologico contiene una lista de habitats y un registro de los animales que
   fueron creados en el zoologico, además tiene los id´s del proximo habitat que se va a crear
   y del proximo animal, dandole un id unico a cada objeto nuevo de estas clases que se crea 
-  en el programa.
-: La clase tiene los métodos básicos para agregar un habitat a la lista de habitats y otro para
+  en el programa.  
+ 
+
+  La clase tiene los métodos básicos para agregar un habitat a la lista de habitats y otro para
   agregar un animal a la lista de registro, como los animales pueden pasar de estar en el 
   registro del zoologico a estar en un habitat, también esta el método de eliminar del registro.
   Esta clase además tiene metodos para seleccionar opciones mediante un selectbox de la
@@ -39,12 +42,15 @@ En el modelo de nuestro programa se encuentran las clases principales, que son l
 
 
 * Habitat
-: Esta clase tiene como atributos, el nombre, la temperatura máxima y minima 
+: 
+  Esta clase tiene como atributos, el nombre, la temperatura máxima y minima 
   que alcanza el habitat, la cantidad máxima de animales que puede contener el habitat, la
   cantidad de animesles que se encuentran en el habitat, el tipo de dieta que pueden tener los
   animales que van a vivir en esa habitat, el id del habitat, para que sea un objeto unico, y 
-  por ultimo una lista que contiene animales.
-: En esta clase tenemos un método que sirve para agregar el animal a la lista de animales, lo
+  por ultimo una lista que contiene animales.  
+ 
+
+  En esta clase tenemos un método que sirve para agregar el animal a la lista de animales, lo
   más importante de esta clase es que se usa la definición de herencia, para así poder crear
   los 4 tipos de habitats que se pueden crear (Desierto, selva, polar, acuatico), en cada una
   de estas clases hijas hay 2 atributos nuevos, para que así se diferencien entre si.
@@ -59,12 +65,15 @@ En el modelo de nuestro programa se encuentran las clases principales, que son l
   ultimo un atributo dieta el cual es otra clase de la que se hablara más adelante.
 
 * Dieta
-: Como se menciono anteriormente la clase dieta esta incluida en la clase animal, esta clase 
+:  
+  Como se menciono anteriormente la clase dieta esta incluida en la clase animal, esta clase 
   cuenta con 3 atributos, los cuales son el nombre de la dieta, ya sea omnivoro, carnivoro o 
   herbivoro, otro atributo que es una lista que guarda los alimentos que pueden comer los animales
   con ese tipo de dieta, y otra lista que guarda los alimentos que el usuario le puede agregar a 
-  la alimentación del animal(para cada dieta son listas diferentes).
-: Esta clase tiene un método que agrega los alimentos a las listas anteriormente mencionadas,
+  la alimentación del animal(para cada dieta son listas diferentes).  
+ 
+
+  Esta clase tiene un método que agrega los alimentos a las listas anteriormente mencionadas,
   tiene otros métodos que sirven para agregar y eliminar un alimento a 
   la lista que le pasemos como parametro, esto es así para utilizar el mismo método para agregar
   y eliminar a las 2 listas de la clase, tenemos 2 métodos parecidos a los que tenemos en la clase
@@ -77,9 +86,12 @@ En la vista de nuestro programa tenemos una clase que se encarga de mostrarle y 
 información al usuario.
 
 * Zoo
-: Como se mencionó anteriormente esta clase se encarga de la interacción con el usuario, esto lo
-  hace mediante los 2 atributos, que tienen la clase zoologico y la clase controladora.
-: los métodos que tenemos en esta clase son, menuZoo que se encarga de mostrar mediante un 
+: 
+  Como se mencionó anteriormente esta clase se encarga de la interacción con el usuario, esto lo
+  hace mediante los 2 atributos, que tienen la clase zoologico y la clase controladora.  
+ 
+
+  los métodos que tenemos en esta clase son, menuZoo que se encarga de mostrar mediante un 
   expander el menu al usuario de las opciones que puede realizar en el zoologico, con sus 
   respectivos buttons retrornando el número del boton presionado, otro método de la clase es 
   menuHabitat, el cual le muestra al usuario con una selectbox los 4 tipos de habitats que puede
@@ -97,33 +109,47 @@ información al usuario.
 En el controlador de nuestro programa tenemos una clase que nos permite conectar las clases que
 están en el modelo y la vista para así implementar toda la lógica necesaria.
 
-* ZoologicoController
-: Para poder hacer la conexion y la implementación de la lógica del programa esta clase debe 
-  tener como atributos la clase modelo principal(Zoologico) y la clase vista(Zoo)
-: El primer método de esta clase es ejecutarMenu, este recibe el número del boton que oprimio
-  el usuario en el menuZoo y ejecuta el método correspondiente.
-: El siguiente método es crearHabitat en el cual llamamos el método de la vista menuHabitat, que
+* ZoologicoController  
+:  
+
+  Para poder hacer la conexion y la implementación de la lógica del programa esta clase debe 
+  tener como atributos la clase modelo principal(Zoologico) y la clase vista(Zoo).  
+
+
+  El primer método de esta clase es ejecutarMenu, este recibe el número del boton que oprimio
+  el usuario en el menuZoo y ejecuta el método correspondiente.  
+
+
+  El siguiente método es crearHabitat en el cual llamamos el método de la vista menuHabitat, que
   nos da el tipo de habitat seleccionada por el usuario, además se llama otro método de la vista
   elegirDieta, que retorna el tipo de dieta selecionada para el habitat que se va a crear, también
   se le pide a la vista la cantidad maxima de animales que pueden vivir en el habitat, después 
   dependiendo de lo que nos retorne el método menuHabitat creamos una u otra clase hija de la 
   clase habitat, al final solo se agrega al zoologico si se presiona el boton y se tienen todos
-  los campos del habitat con un valor valido.
-: El tercer método que podemos encontrar en la clase es crearAnimal en la cual se le pide al 
+  los campos del habitat con un valor valido.  
+
+
+  El tercer método que podemos encontrar en la clase es crearAnimal en la cual se le pide al 
   usuario mediante la clase vista todos los datos que corresponden al animal, cuando se terminan
   de llenar estos datos el usuario debe presionar el boton para que el animal se cree con toda la
-  información y se agregue al registro del zoologico.
-: Otro método perteneciente a la clase es agregarAnimalHabitat, este llama el método de la clase
+  información y se agregue al registro del zoologico.  
+
+
+  Otro método perteneciente a la clase es agregarAnimalHabitat, este llama el método de la clase
   zoologico listarAnimalesRegistro y retorna el animal que eligio el usuario, después este animal
   se le pasa como parametro al método listarHabitats para que el usuario seleccione el habitat
   a donde se agregara el animal que se eligio, cuando el usuario oprima el boton y los 2 campos 
-  esten llenos se agregara este animal al habitat seleccionada y se eliminara del registro.
-: También se encuentra el método modificarAlimentacion, en el se llama un método del modelo 
+  esten llenos se agregara este animal al habitat seleccionada y se eliminara del registro.  
+
+
+  También se encuentra el método modificarAlimentacion, en el se llama un método del modelo 
   listarAnimalesHabitats para que el usuario seleccione el animal que le va a modificar la
   alimentación, además el método menuAlimento de la clase vista retorna la opción que quiere
   elegir el usuario, dependiendo de la opción se listan los alimentos que se pueden agregar a la
-  dieta del animal o los que se pueden eliminar de su dieta y se ejecuta dicha acción.
-: por ultimo, tenemos el método accionesAnimales, este método se encarga de las acciones que pueden
+  dieta del animal o los que se pueden eliminar de su dieta y se ejecuta dicha acción.  
+
+
+  por ultimo, tenemos el método accionesAnimales, este método se encarga de las acciones que pueden
   realizar los animales, igual que en el método anterior se llama listarAnimalesHabitats para que
   el usuario elija el animal, después se llama el método de la vista menuAccion, para saber que 
   accion va a realizar el animal y dependiendo de la accion se le pide al usuario los datos, como 
