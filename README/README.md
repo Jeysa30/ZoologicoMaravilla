@@ -1,7 +1,7 @@
 # ZoologicoMaravilla
 Proyecto Zoológico/Jeysa Blandon/David Salazar
 
-Este proyecto es una simulación en una aplicacion subida en la nube de un zoológico en la cual 
+Este proyecto es una simulación de programa de un zoológico, subida en la nube como una aplicación, en la cual 
 interactúa el usuario como si fuera el trabajador o dueño del zoológico, permitiendo crear 
 habitats, crear animales, agregarlos a un habitat, ver la información de las habitats y sus 
 animales, editar la alimentación y ejecutar ciertas acciones básicas de los animales.
@@ -131,8 +131,37 @@ están en el modelo y la vista para así implementar toda la lógica necesaria.
   temporal se ejecuta la acción o para el caso de jugar, se revisa si el atributo es False o True
   para que el animal pueda realizar la acción.
 
+# Evidencia del funcionamiento del programa
 
+* Menú principal del zoológico:
+: ![Menu principal.jpg](Menu%20principal.jpg)
 
+* Se muestra la opción donde se crear un habitat:
+: -Creamos el habitat polar
+![Se crea el habitat.jpg](Se%20crea%20el%20habitat.jpg)
 
-Imagen:
-![Imagen](agregar un animal a un habitat.jpg)
+* Se muestra la opción donde se crea un animal:
+: ![Crea y agrega un animal al zoologico 1.jpg](Crea%20y%20agrega%20un%20animal%20al%20zoologico%201.jpg)
+![Crea y agrega un animal al zoologico 2.jpg](Crea%20y%20agrega%20un%20animal%20al%20zoologico%202.jpg)
+
+* Se agrega el animal a un habitat si cumple los requisitos:
+: ![agregar un animal a un habitat .jpg](agregar%20un%20animal%20a%20un%20habitat%20.jpg)
+
+* Se modifica el alimento del animal ya estando en el habitat:
+: -Agregar alimento
+![Modificar alimento agregar.jpg](Modificar%20alimento%20agregar.jpg)
+- Eliminar alimento
+![Modificar alimento eliminar.jpg](Modificar%20alimento%20eliminar.jpg)
+
+* Se realiza las siguientes acciones al animal:
+: -Acción de comer
+![animal comer.jpg](animal%20comer.jpg)
+-Acción de dormir
+![animal dormir.jpg](animal%20dormir.jpg)
+-Acción de jugar
+![animal jugar.jpg](animal%20jugar.jpg)
+
+* Por ultimo se puede ver la información del zoológico:
+: ![ver informacion.jpg](ver%20informacion.jpg)
+![ver info 1.jpg](ver%20info%201.jpg)
+![ver info 2.jpg](ver%20info%202.jpg)

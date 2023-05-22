@@ -206,6 +206,7 @@ class ZoologicoController():
                     comer = int(self.vista.solicitar_dato("Ingrese la cantidad de Kg que el animal va a comer: "))
                     opcion = comerAnimal.listarAlimentos()
                     if st.button("Realizar acción"):
+                        st.divider()
                         #Se hace las condiciones al momento de presionar el boton de realizar acción:
 
                         # Se tiene en cuenta cuantos Kg se le dio al animal, para saber si es posible la cantidad que el usuario
@@ -229,6 +230,7 @@ class ZoologicoController():
                     dormir = int(self.vista.solicitar_dato("Ingrese la cantidad de horas que el animal va a dormir: "))
                     if st.button("Realizar acción"):
                         st.session_state["accion_seleccionada"] = st.empty()
+                        st.divider()
                         # Y se hace las condiciones al momento de presionar el boton de realizar acción:
 
                         # Se tiene en cuenta la cantidad de horas del animal, para saber si es posible la cantidad que
@@ -247,6 +249,7 @@ class ZoologicoController():
                     #Si la opción es jugar, entonces solo se le mostrara al usuario una información dependiendo si el animal
                     # ya jugo o no, ya que el artributo es un booleano:
                     st.session_state["accion_seleccionada"] = st.empty()
+                    st.divider()
                     #Asi que verifica que el atributo del animal este en False(lo que significa que el animal no a jugado).
                     if escogerAnimal.jugar == False:
                         escogerAnimal.jugar = True
