@@ -19,7 +19,7 @@ Nuestro programa esta implementado con el sistema de modelo, vista y controlador
 ## Modelos:
 En el modelo de nuestro programa se encuentran las clases principales, que son las siguientes:
 
-* Zoologico
+* __Zoologico__
 : Nuestra clase zoologico contiene una lista de habitats y un registro de los animales que
   fueron creados en el zoologico, además tiene los id´s del proximo habitat que se va a crear
   y del proximo animal, dandole un id unico a cada objeto nuevo de estas clases que se crea 
@@ -40,7 +40,7 @@ En el modelo de nuestro programa se encuentran las clases principales, que son l
   seleccionar alguno.
 
 
-* Habitat
+* __Habitat__
 : Esta clase tiene como atributos, el nombre, la temperatura máxima y minima 
   que alcanza el habitat, la cantidad máxima de animales que puede contener el habitat, la
   cantidad de animesles que se encuentran en el habitat, el tipo de dieta que pueden tener los
@@ -53,7 +53,7 @@ En el modelo de nuestro programa se encuentran las clases principales, que son l
   los 4 tipos de habitats que se pueden crear (Desierto, selva, polar, acuatico), en cada una
   de estas clases hijas hay 2 atributos nuevos, para que así se diferencien entre si.
 
-* Animal
+* __Animal__
 : En esta clase tenemos los atributos nombre, la especie pertenciente al animal, la temperatura
   promedio en la que puede vivir el animal, su respectivo id, la edad, el estado de salud actual,
   la cantidad de horas que puede dormir, y un atributo que maneja la cantidad de horas que le 
@@ -62,7 +62,7 @@ En el modelo de nuestro programa se encuentran las clases principales, que son l
   (Atributo temporal), un atributo booleano para saber si el animal ya jugo en el día y por 
   ultimo un atributo dieta el cual es otra clase de la que se hablara más adelante.
 
-* Dieta
+* __Dieta__
 : Como se menciono anteriormente la clase dieta esta incluida en la clase animal, esta clase 
   cuenta con 3 atributos, los cuales son el nombre de la dieta, ya sea omnivoro, carnivoro o 
   herbivoro, otro atributo que es una lista que guarda los alimentos que pueden comer los animales
@@ -82,7 +82,7 @@ En el modelo de nuestro programa se encuentran las clases principales, que son l
 En la vista de nuestro programa tenemos una clase que se encarga de mostrarle y pedirle la
 información al usuario.
 
-* Zoo
+* __Zoo__
 : Como se mencionó anteriormente esta clase se encarga de la interacción con el usuario, esto lo
   hace mediante los 2 atributos, que tienen la clase zoologico y la clase controladora.  
  
@@ -105,7 +105,7 @@ información al usuario.
 En el controlador de nuestro programa tenemos una clase que nos permite conectar las clases que
 están en el modelo y la vista para así implementar toda la lógica necesaria.
 
-* ZoologicoController  
+* __ZoologicoController__
 : Para poder hacer la conexion y la implementación de la lógica del programa esta clase debe 
   tener como atributos la clase modelo principal(Zoologico) y la clase vista(Zoo).  
 
@@ -153,35 +153,41 @@ están en el modelo y la vista para así implementar toda la lógica necesaria.
 
 # Evidencia del funcionamiento del programa
 
-* Menú principal del zoológico:
+* Menú principal del zoológico
 : ![Menu principal.jpg](Menu%20principal.jpg)
 
-* Se muestra la opción donde se crear un habitat:
-: -Creamos el habitat polar
+* Se muestra la opción donde se crear un habitat
+:  
+
+-Creamos el habitat polar
 ![Se crea el habitat.jpg](Se%20crea%20el%20habitat.jpg)
 
-* Se muestra la opción donde se crea un animal:
+* Se muestra la opción donde se crea un animal
 : ![Crea y agrega un animal al zoologico 1.jpg](Crea%20y%20agrega%20un%20animal%20al%20zoologico%201.jpg)
 ![Crea y agrega un animal al zoologico 2.jpg](Crea%20y%20agrega%20un%20animal%20al%20zoologico%202.jpg)
 
-* Se agrega el animal a un habitat si cumple los requisitos:
+* Se agrega el animal a un habitat si cumple los requisitos
 : ![agregar un animal a un habitat .jpg](agregar%20un%20animal%20a%20un%20habitat%20.jpg)
 
-* Se modifica el alimento del animal ya estando en el habitat:
-: -Agregar alimento
+* Se modifica el alimento del animal ya estando en el habitat
+:  
+ 
+-Agregar alimento
 ![Modificar alimento agregar.jpg](Modificar%20alimento%20agregar.jpg)
-- Eliminar alimento
+-Eliminar alimento
 ![Modificar alimento eliminar.jpg](Modificar%20alimento%20eliminar.jpg)
 
-* Se realiza las siguientes acciones al animal:
-: -Acción de comer
+* __Se realiza las siguientes acciones al animal__
+:  
+
+-Acción de comer
 ![animal comer.jpg](animal%20comer.jpg)
 -Acción de dormir
 ![animal dormir.jpg](animal%20dormir.jpg)
 -Acción de jugar
 ![animal jugar.jpg](animal%20jugar.jpg)
 
-* Por ultimo se puede ver la información del zoológico:
+* Por ultimo se puede ver la información del zoológico
 : ![ver informacion.jpg](ver%20informacion.jpg)
 ![ver info 1.jpg](ver%20info%201.jpg)
 ![ver info 2.jpg](ver%20info%202.jpg)
