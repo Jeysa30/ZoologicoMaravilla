@@ -20,8 +20,7 @@ Nuestro programa esta implementado con el sistema de modelo, vista y controlador
 En el modelo de nuestro programa se encuentran las clases principales, que son las siguientes:
 
 * Zoologico
-:  
-  Nuestra clase zoologico contiene una lista de habitats y un registro de los animales que
+: Nuestra clase zoologico contiene una lista de habitats y un registro de los animales que
   fueron creados en el zoologico, además tiene los id´s del proximo habitat que se va a crear
   y del proximo animal, dandole un id unico a cada objeto nuevo de estas clases que se crea 
   en el programa.  
@@ -42,8 +41,7 @@ En el modelo de nuestro programa se encuentran las clases principales, que son l
 
 
 * Habitat
-: 
-  Esta clase tiene como atributos, el nombre, la temperatura máxima y minima 
+: Esta clase tiene como atributos, el nombre, la temperatura máxima y minima 
   que alcanza el habitat, la cantidad máxima de animales que puede contener el habitat, la
   cantidad de animesles que se encuentran en el habitat, el tipo de dieta que pueden tener los
   animales que van a vivir en esa habitat, el id del habitat, para que sea un objeto unico, y 
@@ -65,8 +63,7 @@ En el modelo de nuestro programa se encuentran las clases principales, que son l
   ultimo un atributo dieta el cual es otra clase de la que se hablara más adelante.
 
 * Dieta
-:  
-  Como se menciono anteriormente la clase dieta esta incluida en la clase animal, esta clase 
+: Como se menciono anteriormente la clase dieta esta incluida en la clase animal, esta clase 
   cuenta con 3 atributos, los cuales son el nombre de la dieta, ya sea omnivoro, carnivoro o 
   herbivoro, otro atributo que es una lista que guarda los alimentos que pueden comer los animales
   con ese tipo de dieta, y otra lista que guarda los alimentos que el usuario le puede agregar a 
@@ -86,8 +83,7 @@ En la vista de nuestro programa tenemos una clase que se encarga de mostrarle y 
 información al usuario.
 
 * Zoo
-: 
-  Como se mencionó anteriormente esta clase se encarga de la interacción con el usuario, esto lo
+: Como se mencionó anteriormente esta clase se encarga de la interacción con el usuario, esto lo
   hace mediante los 2 atributos, que tienen la clase zoologico y la clase controladora.  
  
 
@@ -110,9 +106,7 @@ En el controlador de nuestro programa tenemos una clase que nos permite conectar
 están en el modelo y la vista para así implementar toda la lógica necesaria.
 
 * ZoologicoController  
-:  
-
-  Para poder hacer la conexion y la implementación de la lógica del programa esta clase debe 
+: Para poder hacer la conexion y la implementación de la lógica del programa esta clase debe 
   tener como atributos la clase modelo principal(Zoologico) y la clase vista(Zoo).  
 
 
