@@ -7,7 +7,7 @@ habitats, crear animales, agregarlos a un habitat, ver la información de las ha
 animales, editar la alimentación y ejecutar ciertas acciones básicas de los animales.
 
 >Por medio de este link podrás ver el diagrama del proyecto:
-> https://drive.google.com/file/d/1eWW7pKafF00KIkYdeHOdcfIv6BC2STg6/view?usp=sharing
+> https://drive.google.com/file/d/1zXjpDog5POwmmweIJ8GGd6y8SA__m-Nb/view?usp=sharing
 
 >Por medio de este link podrás entrar a la aplicación del proyecto en la nube:
 > https://jeysa30-zoologicomaravilla-main-dysnsq.streamlit.app
