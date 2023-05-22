@@ -28,13 +28,30 @@ class ZoologicoController():
                 self.vista.mensajeError("Se presentó un error creando al animal")
 
         elif op == 3:
-            self.agregarAnimalHabitat()
+            try:
+                self.agregarAnimalHabitat()
+            except ValueError:
+                self.vista.mensajeError("Se presentó un error agregando el animal")
         elif op == 4:
-            self.modificarAlimentacion()
+            try:
+                self.modificarAlimentacion()
+            except ValueError:
+                self.vista.mensajeError("Se presentó un error modificando la alimentacion del animal")
         elif op == 5:
-            self.accionesAnimales()
+            try:
+                self.accionesAnimales()
+            except ValueError:
+                self.vista.mensajeError("Se presentó un error ejecutando las acciones del animal")
         elif op == 6:
-            self.vista.mostrarTodoZoo()
+            try:
+                self.vista.mostrarTodoZoo()
+            except ValueError:
+                self.vista.mensajeError("Se presentó un error mostrando la informacion del zoologico")
+        elif op == 7:
+            try:
+                self.vista.informacionAPI()
+            except ValueError:
+                self.vista.mensajeError("Se presentó un error buscando en la api")
 
     #Este es el metodo de la opción de crear el habitat, lo hicimos de tal forma que aparezca un formulario seleccionando
     # primero que tipo de habitat es y cual seria la dieta que manejara:

@@ -2,6 +2,7 @@
 import controllers.controllerZoologico as zooController
 import models.Zoologico as zooModel
 import streamlit as st
+import requests as rq
 
 #Creamos la clase Zoo como view, ya que aqui se van a ir colocando los metodos visibles para el usuario y la mayoria de los input.
 class Zoo:
@@ -29,6 +30,7 @@ class Zoo:
             boton_modificar_alimentacion = st.button("Modifica la alimentación de un animal")
             boton_accion_animal = st.button("Realiza una acción a un animal")
             boton_ver_zoo = st.button("Ver información del zoológico")
+            boton_API = st.button("Buscar en API")
 
         if boton_crear_habitat:
             st.session_state["opcion"] = 1
@@ -42,6 +44,8 @@ class Zoo:
             st.session_state["opcion"] = 5
         elif boton_ver_zoo:
             st.session_state["opcion"] = 6
+        elif boton_API:
+            st.session_state["opcion"] = 7
 
         if "opcion" in st.session_state:
             self.mostrarFormulario = self.controlador.ejecutarMenu(st.session_state["opcion"])
@@ -170,3 +174,19 @@ class Zoo:
                         st.error("Este habitat no tiene animales, puede agregar uno en la opcion del menu.")
         else:
             st.error("El zoologico no tiene habitats, puede agregar uno en la opcion del menu.")
+
+
+    #Este método sirve para buscar y mostrar la informacion de una api de pokemones que encontramos
+    def informacionAPI(self):
+        url = "https://pokeapi.co/api/v2/pokemon/"
+        buscar = self.solicitar_dato_string("Ingrese lo que desea buscar de los pokemones")
+        botton_buscar = st.button("Buscar")
+        llamado = rq.get(url + buscar)
+        if botton_buscar:
+            if llamado.status_code == 200:
+                data = llamado.json()
+                for llave, valor in data.items():
+                    self.mensajeExitoso(llave)
+                    st.write(valor)
+            else:
+                st.error("No se encontro esa informacion")
